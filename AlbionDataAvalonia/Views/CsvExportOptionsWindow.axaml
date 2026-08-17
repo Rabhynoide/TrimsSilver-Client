@@ -54,7 +54,7 @@
 
         <TextBlock x:Name="ValidationTextBlock"
                    IsVisible="False"
-                   Foreground="{DynamicResource AFMRed}"
+                   Foreground="{DynamicResource TrimsSilverRed}"
                    TextWrapping="Wrap" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">

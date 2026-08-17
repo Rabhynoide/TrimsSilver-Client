@@ -15,7 +15,7 @@
 
 	<Window.Styles>
 		<Style Selector="Button.link">
-			<Setter Property="Foreground" Value="{DynamicResource AFMOrange}" />
+			<Setter Property="Foreground" Value="{DynamicResource TrimsSilverOrange}" />
 			<Setter Property="Padding" Value="0" />
 			<Setter Property="Cursor" Value="Hand" />
 			<Setter Property="BorderThickness" Value="0" />

@@ -1,4 +1,4 @@
-﻿using Albion.Network;
+using Albion.Network;
 using AlbionDataAvalonia.Combat;
 using AlbionDataAvalonia.Gathering;
 using AlbionDataAvalonia.Items.Services;
@@ -29,14 +29,14 @@ namespace AlbionDataAvalonia.Network.Services
     {
         private const string MacOSCapturePermissionSetupScriptName = "setup-capture-permissions.sh";
         private const string MacOSCapturePermissionLaunchDaemonPath =
-            "/Library/LaunchDaemons/com.albionfreemarket.afmdataclient.chmodbpf.plist";
+            "/Library/LaunchDaemons/org.trimardsisland.trimssilver.chmodbpf.plist";
         private const string MacOSLegacyCapturePermissionScheduleKey = "<key>StartInterval</key>";
         private readonly HashSet<string> _unknownServerIps = new HashSet<string>();
         private readonly object _lifecycleStateLock = new object();
         private readonly SemaphoreSlim _lifecycleGate = new SemaphoreSlim(1, 1);
 
         private readonly Uploader _uploader;
-        private readonly AFMUploader _afmUploader;
+        private readonly TrimsSilverUploader _trimsSilverUploader;
         private readonly PlayerState _playerState;
         private readonly SettingsManager _settingsManager;
         private readonly MailService _mailService;
@@ -63,7 +63,7 @@ namespace AlbionDataAvalonia.Network.Services
         public bool IsMacOSCapturePermissionSetupRequired { get; private set; }
         public bool IsMacOSCapturePermissionSetupOutdated { get; private set; }
 
-        public NetworkListenerService(Uploader uploader, PlayerState playerState, SettingsManager settingsManager, MailService mailService, IdleService idleService, TradeService tradeService, AFMUploader afmUploader, ItemsIdsService itemsIdsService, ItemEstimatedMarketValueService itemEstimatedMarketValues, AchievementsService achievementsService, CombatTrackerService combatTracker, GatheringTrackerService gatheringTracker, PartyTrackerService partyTracker, LootTrackerService lootTracker, MobsService mobsService, LegendaryItemTrackerService legendaryTracker)
+        public NetworkListenerService(Uploader uploader, PlayerState playerState, SettingsManager settingsManager, MailService mailService, IdleService idleService, TradeService tradeService, TrimsSilverUploader trimsSilverUploader, ItemsIdsService itemsIdsService, ItemEstimatedMarketValueService itemEstimatedMarketValues, AchievementsService achievementsService, CombatTrackerService combatTracker, GatheringTrackerService gatheringTracker, PartyTrackerService partyTracker, LootTrackerService lootTracker, MobsService mobsService, LegendaryItemTrackerService legendaryTracker)
         {
             _uploader = uploader;
             _playerState = playerState;
@@ -87,7 +87,7 @@ namespace AlbionDataAvalonia.Network.Services
 
             _idleService.OnDetectedIdle += RestartNetworkListener;
             _tradeService = tradeService;
-            _afmUploader = afmUploader;
+            _trimsSilverUploader = trimsSilverUploader;
             IsMacOSCapturePermissionSetupOutdated =
                 RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
                 && HasLegacyMacOSCapturePermissionSetup();
@@ -185,7 +185,7 @@ namespace AlbionDataAvalonia.Network.Services
                 // ADD HANDLERS HERE
                 // EVENTS
                 // builder.AddEventHandler(new LeaveEventHandler(_playerState));
-                // builder.AddEventHandler(new PlayerCountsEventHandler(_playerState, _afmUploader));
+                // builder.AddEventHandler(new PlayerCountsEventHandler(_playerState, _trimsSilverUploader));
                 // builder.AddEventHandler(new CharacterStatsEventHandler());
                 builder.AddEventHandler(new NewCharacterEventHandler(_combatTracker, _partyTracker));
                 builder.AddEventHandler(new NewMobEventHandler(_combatTracker, _mobsService));
@@ -201,9 +201,9 @@ namespace AlbionDataAvalonia.Network.Services
                 builder.AddEventHandler(new TakeSilverEventHandler(_combatTracker));
                 builder.AddEventHandler(new InCombatStateUpdateEventHandler(_combatTracker));
                 builder.AddEventHandler(new TimeSyncEventHandler(_combatTracker));
-                builder.AddEventHandler(new EstimatedMarketValueUpdateEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _playerState));
-                builder.AddEventHandler(new FullAchievementInfoEventHandler(_achievementsService, _playerState, _afmUploader, _settingsManager));
-                builder.AddEventHandler(new FestivitiesUpdateEventHandler(_playerState, _afmUploader));
+                builder.AddEventHandler(new EstimatedMarketValueUpdateEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _playerState));
+                builder.AddEventHandler(new FullAchievementInfoEventHandler(_achievementsService, _playerState, _trimsSilverUploader, _settingsManager));
+                builder.AddEventHandler(new FestivitiesUpdateEventHandler(_playerState, _trimsSilverUploader));
                 builder.AddEventHandler(new RedZoneWorldMapEventHandler(_playerState, _uploader));
                 builder.AddEventHandler(new HarvestFinishedEventHandler(_gatheringTracker));
                 builder.AddEventHandler(new RewardGrantedEventHandler(_gatheringTracker));
@@ -219,13 +219,13 @@ namespace AlbionDataAvalonia.Network.Services
                 builder.AddEventHandler(new PartyLootItemsEventHandler(_lootTracker));
                 builder.AddEventHandler(new PartyLootItemsRemovedEventHandler(_lootTracker));
                 builder.AddEventHandler(new PartyLootItemTypesRemovedEventHandler(_lootTracker));
-                builder.AddEventHandler(new NewSimpleItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _gatheringTracker, _lootTracker, _playerState));
-                builder.AddEventHandler(new NewJournalItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
-                builder.AddEventHandler(new NewLaborerItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
-                builder.AddEventHandler(new NewEquipmentItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState, _legendaryTracker));
-                builder.AddEventHandler(new NewFurnitureItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
-                builder.AddEventHandler(new NewKillTrophyItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
-                builder.AddEventHandler(new NewSiegeBannerItemEventHandler(_itemsIdsService, _afmUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewSimpleItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _gatheringTracker, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewJournalItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewLaborerItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewEquipmentItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState, _legendaryTracker));
+                builder.AddEventHandler(new NewFurnitureItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewKillTrophyItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
+                builder.AddEventHandler(new NewSiegeBannerItemEventHandler(_itemsIdsService, _trimsSilverUploader, _itemEstimatedMarketValues, _lootTracker, _playerState));
                 builder.AddEventHandler(new NewEquipmentItemLegendarySoulEventHandler(_legendaryTracker));
                 builder.AddEventHandler(new BankVaultInfoEventHandler(_legendaryTracker));
                 builder.AddEventHandler(new GuildVaultInfoEventHandler(_legendaryTracker));
@@ -237,7 +237,7 @@ namespace AlbionDataAvalonia.Network.Services
                 builder.AddResponseHandler(new AuctionGetOffersResponseHandler(_uploader, _playerState, _tradeService));
                 builder.AddResponseHandler(new AuctionGetRequestsResponseHandler(_uploader, _playerState, _tradeService));
                 builder.AddResponseHandler(new AuctionGetItemAverageStatsResponseHandler(_uploader, _playerState));
-                builder.AddResponseHandler(new JoinResponseHandler(_playerState, _afmUploader, _partyTracker, _lootTracker, _legendaryTracker));
+                builder.AddResponseHandler(new JoinResponseHandler(_playerState, _trimsSilverUploader, _partyTracker, _lootTracker, _legendaryTracker));
                 builder.AddResponseHandler(new AuctionGetGoldAverageStatsResponseHandler(_uploader));
                 builder.AddResponseHandler(new GetMailInfosResponseHandler(_playerState, _mailService));
                 builder.AddResponseHandler(new ReadMailResponseHandler(_playerState, _mailService));
@@ -450,7 +450,7 @@ namespace AlbionDataAvalonia.Network.Services
                 if (process.ExitCode == 0)
                 {
                     IsMacOSCapturePermissionSetupOutdated = false;
-                    Log.Information("macOS packet capture permission setup completed. Restart AFM Data Client. If capture is still denied, log out and back in or reboot.");
+                    Log.Information("macOS packet capture permission setup completed. Restart TrimsSilver Data Client. If capture is still denied, log out and back in or reboot.");
                     if (!string.IsNullOrWhiteSpace(output))
                     {
                         Log.Debug("macOS packet capture permission setup output: {Output}", output.Trim());
@@ -504,7 +504,7 @@ namespace AlbionDataAvalonia.Network.Services
         private static void LogMacOSCapturePermissionHelp()
         {
             Log.Error(
-                "Run the macOS packet capture permission setup once, then restart AFM Data Client: sudo /bin/sh \"{SetupScriptPath}\". If capture is still denied after setup, log out and back in or reboot.",
+                "Run the macOS packet capture permission setup once, then restart TrimsSilver Data Client: sudo /bin/sh \"{SetupScriptPath}\". If capture is still denied after setup, log out and back in or reboot.",
                 GetMacOSCapturePermissionSetupScriptPath());
         }
 
@@ -519,7 +519,7 @@ namespace AlbionDataAvalonia.Network.Services
             return File.Exists(bundleScriptPath)
                 ? bundleScriptPath
                 : Path.Combine(
-                    "AFMDataClient_MacOS.app",
+                    "TrimsSilver_MacOS.app",
                     "Contents",
                     "Resources",
                     MacOSCapturePermissionSetupScriptName);

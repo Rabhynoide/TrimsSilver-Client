@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Auth.Models;
+using AlbionDataAvalonia.Auth.Models;
 using AlbionDataAvalonia.Auth.Services;
 using AlbionDataAvalonia.Network.Events;
 using AlbionDataAvalonia.Network.Models;
@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace AlbionDataAvalonia.Network.Services
 {
-    public class AFMUploader : IDisposable
+    public class TrimsSilverUploader : IDisposable
     {
         private const string FlipperOrdersPath = "flipperOrders";
         private const string PrivateOrderSharesPath = "privateOrderShares";
@@ -38,7 +38,7 @@ namespace AlbionDataAvalonia.Network.Services
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        private static readonly JsonSerializerOptions AfmApiSerializerOptions = new()
+        private static readonly JsonSerializerOptions TrimsSilverApiSerializerOptions = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
@@ -70,7 +70,7 @@ namespace AlbionDataAvalonia.Network.Services
         public event EventHandler<FestivitiesUploadEventArgs>? OnFestivitiesUpload;
         public event EventHandler<ItemEstimatedMarketValueUploadEventArgs>? OnItemEstimatedMarketValueUpload;
 
-        public AFMUploader(PlayerState playerState, SettingsManager settingsManager, AuthService authService)
+        public TrimsSilverUploader(PlayerState playerState, SettingsManager settingsManager, AuthService authService)
         {
             _playerState = playerState;
             _settingsManager = settingsManager;
@@ -128,11 +128,11 @@ namespace AlbionDataAvalonia.Network.Services
 
         public void Initialize()
         {
-            httpClient.BaseAddress = new Uri(_settingsManager.AppSettings.AfmDataClientIngestApiBase);
+            httpClient.BaseAddress = new Uri(_settingsManager.AppSettings.TrimsSilverIngestApiBase);
             httpClient.DefaultRequestHeaders.UserAgent.Clear();
             var version = AlbionDataAvalonia.ClientUpdater.GetVersion() ?? "unknown";
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"afmDataClient-v.{version}");
-            httpClient.DefaultRequestHeaders.Referrer = new Uri("https://github.com/JPCodeCraft/AlbionDataAvalonia");
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"trimsSilverDataClient-v.{version}");
+            httpClient.DefaultRequestHeaders.Referrer = new Uri("https://github.com/Rabhynoide/TrimsSilver-Client");
 
             // Ensure we apply headers immediately if a session already exists.
             UpdateAuthHeader(_authService.CurrentFirebaseUser);
@@ -167,7 +167,7 @@ namespace AlbionDataAvalonia.Network.Services
                     return UploadStatus.Failed;
                 }
 
-                var afmMarketUpload = new AfmMarketUpload(marketUpload, _playerState.AlbionServer.Id, firebaseUserId);
+                var trimsSilverMarketUpload = new TrimsSilverMarketUpload(marketUpload, _playerState.AlbionServer.Id, firebaseUserId);
 
                 var serializerOptions = new JsonSerializerOptions
                 {
@@ -175,13 +175,13 @@ namespace AlbionDataAvalonia.Network.Services
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
                 };
 
-                JsonNode? jsonNode = JsonSerializer.SerializeToNode(afmMarketUpload, serializerOptions);
+                JsonNode? jsonNode = JsonSerializer.SerializeToNode(trimsSilverMarketUpload, serializerOptions);
 
                 if (jsonNode is JsonObject jsonObject && jsonObject["orders"] is JsonArray ordersArray)
                 {
                     for (int i = 0; i < ordersArray.Count; i++)
                     {
-                        var originalOrder = afmMarketUpload.Orders[i];
+                        var originalOrder = trimsSilverMarketUpload.Orders[i];
                         var orderNode = ordersArray[i]?.AsObject();
                         if (orderNode != null)
                         {
@@ -262,7 +262,7 @@ namespace AlbionDataAvalonia.Network.Services
                         return UploadStatus.Failed;
                     }
 
-                    Log.Debug("Successfully sent AfmMarketUpload to {RequestUri}. Identifier: {Identifier}. ServerId: {ServerId}. {MarketUploadSummary}", requestUri, identifier, _playerState.AlbionServer.Id, GetMarketUploadSummary(marketUpload));
+                    Log.Debug("Successfully sent TrimsSilverMarketUpload to {RequestUri}. Identifier: {Identifier}. ServerId: {ServerId}. {MarketUploadSummary}", requestUri, identifier, _playerState.AlbionServer.Id, GetMarketUploadSummary(marketUpload));
                     return UploadStatus.Success;
                 }
                 finally
@@ -313,7 +313,7 @@ namespace AlbionDataAvalonia.Network.Services
                     return null;
                 }
 
-                return await response.Content.ReadFromJsonAsync<PrivateOrderSharesResponse>(AfmApiSerializerOptions, cancellationToken);
+                return await response.Content.ReadFromJsonAsync<PrivateOrderSharesResponse>(TrimsSilverApiSerializerOptions, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -342,7 +342,7 @@ namespace AlbionDataAvalonia.Network.Services
 
                 async Task<HttpResponseMessage> SendAsync()
                 {
-                    return await httpClient.PutAsJsonAsync(requestUri, payload, AfmApiSerializerOptions, cancellationToken);
+                    return await httpClient.PutAsJsonAsync(requestUri, payload, TrimsSilverApiSerializerOptions, cancellationToken);
                 }
 
                 using var response = await SendWithUnauthorizedRecoveryAsync(SendAsync, cancellationToken);
@@ -357,7 +357,7 @@ namespace AlbionDataAvalonia.Network.Services
                     return null;
                 }
 
-                return await response.Content.ReadFromJsonAsync<SavePrivateOrderSharesResponse>(AfmApiSerializerOptions, cancellationToken);
+                return await response.Content.ReadFromJsonAsync<SavePrivateOrderSharesResponse>(TrimsSilverApiSerializerOptions, cancellationToken);
             }
             catch (Exception ex)
             {
@@ -1270,7 +1270,7 @@ namespace AlbionDataAvalonia.Network.Services
                     return await httpClient.PostAsJsonAsync(
                         requestUri,
                         festivitiesUpload,
-                        AfmApiSerializerOptions);
+                        TrimsSilverApiSerializerOptions);
                 }
 
                 HttpResponseMessage? response = null;

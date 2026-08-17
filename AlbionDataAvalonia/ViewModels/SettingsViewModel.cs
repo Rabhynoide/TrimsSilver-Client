@@ -27,7 +27,7 @@ public partial class SettingsViewModel : ViewModelBase
     private readonly PlayerState _playerState;
     private readonly CombatTrackerService? combatTracker;
     private readonly AuthService? authService;
-    private readonly AFMUploader? afmUploader;
+    private readonly TrimsSilverUploader? trimsSilverUploader;
     private readonly DatabaseBackupService? databaseBackupService;
 
     [ObservableProperty]
@@ -126,14 +126,14 @@ public partial class SettingsViewModel : ViewModelBase
         PlayerState playerState,
         CombatTrackerService combatTracker,
         AuthService authService,
-        AFMUploader afmUploader,
+        TrimsSilverUploader trimsSilverUploader,
         DatabaseBackupService databaseBackupService)
     {
         _settingsManager = settingsManager;
         _playerState = playerState;
         this.combatTracker = combatTracker;
         this.authService = authService;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.databaseBackupService = databaseBackupService;
 
         UserSettings = _settingsManager.UserSettings;
@@ -280,7 +280,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     private async Task SavePrivateOrderSharesAsync(IEnumerable<string> sharedUsers, string successStatus)
     {
-        if (!IsUserLoggedIn || afmUploader is null)
+        if (!IsUserLoggedIn || trimsSilverUploader is null)
         {
             SetSharingStatus("Sign in to manage private sharing.");
             return;
@@ -291,7 +291,7 @@ public partial class SettingsViewModel : ViewModelBase
         {
             UnresolvedEntriesText = string.Empty;
             SetSharingStatus("Saving sharing list...");
-            var response = await afmUploader.SavePrivateOrderSharesAsync(sharedUsers);
+            var response = await trimsSilverUploader.SavePrivateOrderSharesAsync(sharedUsers);
             if (!IsCurrentSharingUser(expectedUserId))
             {
                 return;
@@ -499,7 +499,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     private async Task LoadPrivateOrderSharesAsync(bool showStatus)
     {
-        if (!IsUserLoggedIn || afmUploader is null)
+        if (!IsUserLoggedIn || trimsSilverUploader is null)
         {
             if (showStatus)
             {
@@ -512,7 +512,7 @@ public partial class SettingsViewModel : ViewModelBase
         var expectedUserId = CurrentFirebaseUserId;
         await RunSharingOperationAsync(async () =>
         {
-            var response = await afmUploader.GetPrivateOrderSharesAsync();
+            var response = await trimsSilverUploader.GetPrivateOrderSharesAsync();
             if (!IsCurrentSharingUser(expectedUserId))
             {
                 return;

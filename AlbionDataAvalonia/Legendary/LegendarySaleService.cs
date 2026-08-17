@@ -276,7 +276,7 @@ public sealed class LegendarySaleService : IDisposable
 
     private Uri GetBackendBaseUri()
     {
-        return settingsManager.AppSettings.GetAfmBackendApiBaseUri();
+        return settingsManager.AppSettings.GetTrimsSilverBackendApiBaseUri();
     }
 
     private static async Task<string> ReadErrorAsync(

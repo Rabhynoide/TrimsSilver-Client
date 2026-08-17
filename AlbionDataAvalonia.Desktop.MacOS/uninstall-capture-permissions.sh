@@ -2,9 +2,9 @@
 set -eu
 
 GROUP_NAME="afmdataclient_bpf"
-APP_SUPPORT_DIR="/Library/Application Support/AFMDataClient"
+APP_SUPPORT_DIR="/Library/Application Support/TrimsSilver"
 HELPER_DIR="$APP_SUPPORT_DIR/ChmodBPF"
-PLIST_LABEL="com.albionfreemarket.afmdataclient.chmodbpf"
+PLIST_LABEL="org.trimardsisland.trimssilver.chmodbpf"
 PLIST_PATH="/Library/LaunchDaemons/$PLIST_LABEL.plist"
 LEGACY_LOG_PATH="/var/log/afmdataclient-chmodbpf.log"
 
@@ -36,5 +36,5 @@ if dscl . -read "/Groups/$GROUP_NAME" >/dev/null 2>&1; then
     dseditgroup -q -o delete "$GROUP_NAME"
 fi
 
-echo "AFM Data Client packet capture permissions were removed."
+echo "TrimsSilver Data Client packet capture permissions were removed."
 echo "Your database, backups, settings, and logs in your user Library were preserved."

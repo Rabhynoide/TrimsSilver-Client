@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Network.Events;
+using AlbionDataAvalonia.Network.Events;
 using AlbionDataAvalonia.Network.Models;
 using AlbionDataAvalonia.Network.Pow;
 using AlbionDataAvalonia.Settings;
@@ -25,7 +25,7 @@ public class Uploader : IDisposable
     private PlayerState _playerState;
     private ConnectionService _connectionService;
     private SettingsManager _settingsManager;
-    private AFMUploader _afmUploader;
+    private TrimsSilverUploader _trimsSilverUploader;
 
     public event EventHandler<MarketUploadEventArgs> OnMarketUpload;
     public event EventHandler<GoldPriceUploadEventArgs> OnGoldPriceUpload;
@@ -37,12 +37,12 @@ public class Uploader : IDisposable
     public int uploadQueueCount => uploadQueue.Count;
     public int runningTasksCount => runningTasks.Count;
 
-    public Uploader(PlayerState playerState, ConnectionService connectionService, SettingsManager settingsManager, AFMUploader aFMUploader)
+    public Uploader(PlayerState playerState, ConnectionService connectionService, SettingsManager settingsManager, TrimsSilverUploader trimsSilverUploader)
     {
         _playerState = playerState;
         _connectionService = connectionService;
         _settingsManager = settingsManager;
-        _afmUploader = aFMUploader;
+        _trimsSilverUploader = trimsSilverUploader;
 
         OnGoldPriceUpload += _playerState.GoldPriceUploadHandler;
         OnMarketUpload += _playerState.MarketUploadHandler;
@@ -60,12 +60,12 @@ public class Uploader : IDisposable
         }
         try
         {
-            if (_playerState.UploadToAfmOnly)
+            if (_playerState.UploadToTrimsSilverOnly)
             {
-                var afmUploadStatus = await _afmUploader.UploadMarketOrder(marketUpload);
-                OnMarketUpload?.Invoke(this, new MarketUploadEventArgs(marketUpload, _playerState.AlbionServer, afmUploadStatus, UploadScope.Private));
+                var trimsSilverUploadStatus = await _trimsSilverUploader.UploadMarketOrder(marketUpload);
+                OnMarketUpload?.Invoke(this, new MarketUploadEventArgs(marketUpload, _playerState.AlbionServer, trimsSilverUploadStatus, UploadScope.Private));
 
-                if (afmUploadStatus == UploadStatus.Success)
+                if (trimsSilverUploadStatus == UploadStatus.Success)
                 {
                     Log.Information("Market upload to AFM Flipper complete. {Offers} offers, {Requests} requests. Locations: {Location}",
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer),
@@ -75,21 +75,21 @@ public class Uploader : IDisposable
                 else
                 {
                     Log.Error("Market upload to AFM Flipper receiver status {Status}. {Offers} offers, {Requests} requests.",
-                        afmUploadStatus,
+                        trimsSilverUploadStatus,
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer),
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.request));
                 }
             }
 
             var ordersForPublicUpload = new List<MarketOrder>();
-            if (!_playerState.UploadToAfmOnly)
+            if (!_playerState.UploadToTrimsSilverOnly)
             {
                 ordersForPublicUpload.AddRange(marketUpload.Orders);
             }
             else
             {
                 ordersForPublicUpload.AddRange(marketUpload.Orders.Where(o =>
-                    _settingsManager.AppSettings.ItemsToUploadToAfm?.Any(s => o.ItemTypeId.Contains(s)) == true));
+                    _settingsManager.AppSettings.ItemsToUploadToTrimsSilver?.Any(s => o.ItemTypeId.Contains(s)) == true));
             }
 
             if (ordersForPublicUpload.Any())

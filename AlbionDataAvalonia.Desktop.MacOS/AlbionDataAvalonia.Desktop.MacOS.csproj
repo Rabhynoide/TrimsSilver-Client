@@ -8,8 +8,8 @@
     <SelfContained>true</SelfContained>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyTitle>Albion Free Market Data Client</AssemblyTitle>
-    <AssemblyName>AFMDataClient_MacOS</AssemblyName>
+    <AssemblyTitle>TrimsSilver Data Client</AssemblyTitle>
+    <AssemblyName>TrimsSilver_MacOS</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.3.10" />

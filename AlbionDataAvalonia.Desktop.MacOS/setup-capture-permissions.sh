@@ -2,11 +2,11 @@
 set -eu
 
 GROUP_NAME="afmdataclient_bpf"
-GROUP_REAL_NAME="AFM Data Client packet capture"
-APP_SUPPORT_DIR="/Library/Application Support/AFMDataClient"
-HELPER_DIR="/Library/Application Support/AFMDataClient/ChmodBPF"
+GROUP_REAL_NAME="TrimsSilver Data Client packet capture"
+APP_SUPPORT_DIR="/Library/Application Support/TrimsSilver"
+HELPER_DIR="/Library/Application Support/TrimsSilver/ChmodBPF"
 HELPER_PATH="$HELPER_DIR/chmod-bpf.sh"
-PLIST_LABEL="com.albionfreemarket.afmdataclient.chmodbpf"
+PLIST_LABEL="org.trimardsisland.trimssilver.chmodbpf"
 PLIST_PATH="/Library/LaunchDaemons/$PLIST_LABEL.plist"
 LEGACY_LOG_PATH="/var/log/afmdataclient-chmodbpf.log"
 
@@ -107,4 +107,4 @@ if ! launchctl bootstrap system "$PLIST_PATH" >/dev/null 2>&1; then
 fi
 
 echo "Packet capture permissions were installed for user '$TARGET_USER'."
-echo "Restart AFM Data Client. If capture is still denied, log out and back in or reboot."
+echo "Restart TrimsSilver Data Client. If capture is still denied, log out and back in or reboot."

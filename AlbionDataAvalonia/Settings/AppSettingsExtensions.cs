@@ -4,12 +4,12 @@ namespace AlbionDataAvalonia.Settings;
 
 public static class AppSettingsExtensions
 {
-    public static Uri GetAfmBackendApiBaseUri(this AppSettings settings)
+    public static Uri GetTrimsSilverBackendApiBaseUri(this AppSettings settings)
     {
-        var value = settings.AfmBackendApiBase;
+        var value = settings.TrimsSilverBackendApiBase;
         if (string.IsNullOrWhiteSpace(value))
         {
-            value = settings.AfmAuthApiUrl;
+            value = settings.TrimsSilverAuthApiUrl;
             if (value.EndsWith("/api", StringComparison.OrdinalIgnoreCase))
             {
                 value = value[..^"/api".Length];

@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Locations.Models;
+using AlbionDataAvalonia.Locations.Models;
 using AlbionDataAvalonia.Network.Models;
 using System;
 
@@ -11,17 +11,17 @@ namespace AlbionDataAvalonia.State.Events
         public AlbionServer? AlbionServer { get; set; }
         public bool IsInGame { get; set; }
         public bool HasEncryptedData { get; set; }
-        public bool UploadToAfmOnly { get; set; }
+        public bool UploadToTrimsSilverOnly { get; set; }
         public bool ContributeToPublic { get; set; }
         public bool ShareWithFriends { get; set; }
-        public PlayerStateEventArgs(AlbionLocation location, string name, AlbionServer? albionServer, bool isInGame, bool hasEncryptedData, bool uploadToAfmOnly, bool contributeToPublic, bool shareWithFriends)
+        public PlayerStateEventArgs(AlbionLocation location, string name, AlbionServer? albionServer, bool isInGame, bool hasEncryptedData, bool uploadToTrimsSilverOnly, bool contributeToPublic, bool shareWithFriends)
         {
             Location = location;
             Name = name;
             AlbionServer = albionServer;
             IsInGame = isInGame;
             HasEncryptedData = hasEncryptedData;
-            UploadToAfmOnly = uploadToAfmOnly;
+            UploadToTrimsSilverOnly = uploadToTrimsSilverOnly;
             ContributeToPublic = contributeToPublic;
             ShareWithFriends = shareWithFriends;
         }

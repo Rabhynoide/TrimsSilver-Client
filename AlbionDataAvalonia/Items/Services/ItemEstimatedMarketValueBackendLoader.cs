@@ -56,10 +56,10 @@ public sealed class ItemEstimatedMarketValueBackendLoader : IDisposable
 
     public void Initialize()
     {
-        httpClient.BaseAddress = new Uri(settingsManager.AppSettings.AfmTopItemsApiBase);
+        httpClient.BaseAddress = new Uri(settingsManager.AppSettings.TrimsSilverTopItemsApiBase);
         httpClient.DefaultRequestHeaders.UserAgent.Clear();
         var version = AlbionDataAvalonia.ClientUpdater.GetVersion() ?? "unknown";
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"afmDataClient-v.{version}");
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"trimsSilverDataClient-v.{version}");
         httpClient.DefaultRequestHeaders.Referrer = new Uri("https://github.com/JPCodeCraft/AlbionDataAvalonia");
         UpdateAuthHeader(authService.CurrentFirebaseUser);
     }

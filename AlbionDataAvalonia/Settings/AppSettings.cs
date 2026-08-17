@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace AlbionDataAvalonia.Settings;
 
@@ -15,17 +15,16 @@ public class AppSettings
     public string? FileNameFormat { get; set; }
     public double FirstUpdateCheckDelayMins { get; set; }
     public double UpdateCheckIntervalHours { get; set; }
-    public double AppSettingsRetryLoadIntervalMins { get; set; }
     public int NetworkDevicesStartDelaySecs { get; set; }
     public int NetworkDevicesIdleMinutes { get; set; }
     public int NetworkDevicesIdleCheckMinutes { get; set; }
 
-    public string AfmAuthClientId { get; set; } = string.Empty;
-    public string AfmAuthRedirectUri { get; set; } = string.Empty;
-    public string AfmAuthApiUrl { get; set; } = string.Empty;
-    public string AfmBackendApiBase { get; set; } = string.Empty;
-    public string AfmTopItemsApiBase { get; set; } = string.Empty;
-    public string AfmDataClientIngestApiBase { get; set; } = string.Empty;
+    public string TrimsSilverAuthClientId { get; set; } = string.Empty;
+    public string TrimsSilverAuthRedirectUri { get; set; } = string.Empty;
+    public string TrimsSilverAuthApiUrl { get; set; } = string.Empty;
+    public string TrimsSilverBackendApiBase { get; set; } = string.Empty;
+    public string TrimsSilverTopItemsApiBase { get; set; } = string.Empty;
+    public string TrimsSilverIngestApiBase { get; set; } = string.Empty;
 
-    public List<string> ItemsToUploadToAfm { get; set; } = new List<string>();
+    public List<string> ItemsToUploadToTrimsSilver { get; set; } = new List<string>();
 }

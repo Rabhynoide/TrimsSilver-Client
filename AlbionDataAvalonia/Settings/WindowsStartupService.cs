@@ -9,7 +9,7 @@ namespace AlbionDataAvalonia.Settings;
 public class WindowsStartupService
 {
     private const string RunKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-    private const string RunValueName = "Albion Free Market Data Client";
+    private const string RunValueName = "TrimsSilver Data Client";
 
     public bool IsSupported => OperatingSystem.IsWindows();
 

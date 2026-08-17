@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key>
-    <string>AFM Data Client</string>
+    <string>TrimsSilver Data Client</string>
     <key>CFBundleDisplayName</key>
-    <string>AFM Data Client</string>
+    <string>TrimsSilver Data Client</string>
     <key>CFBundleIdentifier</key>
-    <string>com.albiondataavalonia.app</string>
+    <string>org.trimardsisland.trimssilver</string>
     <key>CFBundleVersion</key>
     <string>$(Version)</string>
     <key>CFBundleShortVersionString</key>
     <string>$(Version)</string>
     <key>CFBundleExecutable</key>
-    <string>AFMDataClient_MacOS</string>
+    <string>TrimsSilver_MacOS</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>

@@ -15,20 +15,20 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class JoinResponseHandler : ResponsePacketHandler<JoinResponse>
 {
     private readonly PlayerState playerState;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
     private readonly PartyTrackerService partyTracker;
     private readonly LootTrackerService lootTracker;
     private readonly LegendaryItemTrackerService legendaryTracker;
 
     public JoinResponseHandler(
         PlayerState playerState,
-        AFMUploader afmUploader,
+        TrimsSilverUploader trimsSilverUploader,
         PartyTrackerService partyTracker,
         LootTrackerService lootTracker,
         LegendaryItemTrackerService legendaryTracker) : base((int)OperationCodes.Join)
     {
         this.playerState = playerState;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.partyTracker = partyTracker;
         this.lootTracker = lootTracker;
         this.legendaryTracker = legendaryTracker;
@@ -51,7 +51,7 @@ public class JoinResponseHandler : ResponsePacketHandler<JoinResponse>
             }
             else
             {
-                afmUploader.UploadGlobalMultiplier(new GlobalMultiplierUpload
+                trimsSilverUploader.UploadGlobalMultiplier(new GlobalMultiplierUpload
                 {
                     ServerId = playerState.AlbionServer.Id,
                     GlobalMultiplier = value.globalMultiplier.Value

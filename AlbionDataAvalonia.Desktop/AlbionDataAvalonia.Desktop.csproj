@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <!--If
@@ -15,8 +15,8 @@
     <SelfContained>true</SelfContained>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyTitle>Albion Free Market Data Client</AssemblyTitle>
-    <AssemblyName>AFMDataClient</AssemblyName>
+    <AssemblyTitle>TrimsSilver Data Client</AssemblyTitle>
+    <AssemblyName>TrimsSilver</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.3.10" />

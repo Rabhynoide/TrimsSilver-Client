@@ -120,7 +120,7 @@ public static class ClientUpdater
         {
             Log.Information("Downloading the new version from {DownloadUrl}", update.WindowsDownloadUrl);
             var data = await httpClient.GetByteArrayAsync(update.WindowsDownloadUrl);
-            var filePath = Path.Combine(Path.GetTempPath(), $"AFMDataClientSetup_v_{update.Version}.exe");
+            var filePath = Path.Combine(Path.GetTempPath(), $"TrimsSilverSetup_v_{update.Version}.exe");
             await File.WriteAllBytesAsync(filePath, data);
 
             var process = new Process
@@ -279,7 +279,7 @@ public static class ClientUpdater
             ? $"v.{version}-beta"
             : $"v.{version}";
 
-        return $"https://github.com/JPCodeCraft/AlbionDataAvalonia/releases/tag/{tag}";
+        return $"https://github.com/Rabhynoide/TrimsSilver-Client/releases/tag/{tag}";
     }
 }
 

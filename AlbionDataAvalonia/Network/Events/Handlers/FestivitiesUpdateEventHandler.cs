@@ -13,13 +13,13 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class FestivitiesUpdateEventHandler : EventPacketHandler<FestivitiesUpdateEvent>
 {
     private readonly PlayerState playerState;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
 
-    public FestivitiesUpdateEventHandler(PlayerState playerState, AFMUploader afmUploader)
+    public FestivitiesUpdateEventHandler(PlayerState playerState, TrimsSilverUploader trimsSilverUploader)
         : base((int)EventCodes.FestivitiesUpdate)
     {
         this.playerState = playerState;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
     }
 
     protected override Task OnActionAsync(FestivitiesUpdateEvent value)
@@ -71,7 +71,7 @@ public class FestivitiesUpdateEventHandler : EventPacketHandler<FestivitiesUpdat
             });
         }
 
-        afmUploader.UploadFestivities(upload);
+        trimsSilverUploader.UploadFestivities(upload);
 
         return Task.CompletedTask;
     }

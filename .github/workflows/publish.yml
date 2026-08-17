@@ -46,24 +46,24 @@ jobs:
       - name: Compress macOS .app bundle (x64) preserving macOS metadata
         run: |
           cd ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-x64/publish/
-          ditto -c -k --sequesterRsrc --keepParent AFMDataClient_MacOS.app AFMDataClient_MacOS_x64.app.zip
+          ditto -c -k --sequesterRsrc --keepParent TrimsSilver_MacOS.app TrimsSilver_MacOS_x64.app.zip
 
       - name: Compress macOS .app bundle (arm64) preserving macOS metadata
         run: |
           cd ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-arm64/publish/
-          ditto -c -k --sequesterRsrc --keepParent AFMDataClient_MacOS.app AFMDataClient_MacOS_arm64.app.zip
+          ditto -c -k --sequesterRsrc --keepParent TrimsSilver_MacOS.app TrimsSilver_MacOS_arm64.app.zip
 
       - name: Upload macOS artifact (x64)
         uses: actions/upload-artifact@v4
         with:
           name: macos-app-x64
-          path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-x64/publish/AFMDataClient_MacOS_x64.app.zip
+          path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-x64/publish/TrimsSilver_MacOS_x64.app.zip
 
       - name: Upload macOS artifact (arm64)
         uses: actions/upload-artifact@v4
         with:
           name: macos-app-arm64
-          path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-arm64/publish/AFMDataClient_MacOS_arm64.app.zip
+          path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-arm64/publish/TrimsSilver_MacOS_arm64.app.zip
 
   build:
     runs-on: windows-latest
@@ -90,13 +90,13 @@ jobs:
           if ($branch -eq "beta") {
             $channel = "beta"
             $releaseTag = "v.$version-beta"
-            $releaseName = "Albion Free Market Data Client v.$version Beta"
+            $releaseName = "TrimsSilver Data Client v.$version Beta"
             $isPrerelease = "true"
           }
           elseif ($branch -eq "master") {
             $channel = "stable"
             $releaseTag = "v.$version"
-            $releaseName = "Albion Free Market Data Client v.$version"
+            $releaseName = "TrimsSilver Data Client v.$version"
             $isPrerelease = "false"
           }
           else {
@@ -178,7 +178,7 @@ jobs:
             LATEST_TAG=$(git tag --merged HEAD --list "v.*" --sort=-version:refname | grep -v -- "-beta$" | head -n 1)
           fi
           CURRENT_COMMIT=$(git rev-parse HEAD)
-          REPO_URL="https://github.com/JPCodeCraft/AlbionDataAvalonia"
+          REPO_URL="https://github.com/Rabhynoide/TrimsSilver-Client"
 
           if [ -z "$LATEST_TAG" ]; then
             echo "No tags found. Using all commits for the log."
@@ -259,8 +259,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: C:/Users/runneradmin/Documents/Inno Setup Output/AFMDataClientSetup_v_${{ env.VERSION }}.exe
-          asset_name: AFMDataClientSetup_v_${{ env.VERSION }}.exe
+          asset_path: C:/Users/runneradmin/Documents/Inno Setup Output/TrimsSilverSetup_v_${{ env.VERSION }}.exe
+          asset_name: TrimsSilverSetup_v_${{ env.VERSION }}.exe
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux Binary)
@@ -269,8 +269,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/AFMDataClient_Linux64
-          asset_name: AFMDataClient_Linux64
+          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/TrimsSilver_Linux64
+          asset_name: TrimsSilver_Linux64
           asset_content_type: application/octet-stream
 
       - name: Upload Release Asset (Linux Installer)
@@ -279,8 +279,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/AFMDataClient_Linux64_Installer.sh
-          asset_name: AFMDataClient_Linux64_Installer.sh
+          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/TrimsSilver_Linux64_Installer.sh
+          asset_name: TrimsSilver_Linux64_Installer.sh
           asset_content_type: application/x-sh
 
       - name: Upload Release Asset (Linux Uninstaller)
@@ -289,8 +289,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/AFMDataClient_Linux64_Uninstaller.sh
-          asset_name: AFMDataClient_Linux64_Uninstaller.sh
+          asset_path: ./AlbionDataAvalonia.Desktop.Linux/bin/Release/net10.0/linux-x64/publish/TrimsSilver_Linux64_Uninstaller.sh
+          asset_name: TrimsSilver_Linux64_Uninstaller.sh
           asset_content_type: application/x-sh
 
       - name: Upload Release Asset (macOS .app Bundle x64)
@@ -299,8 +299,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-x64/publish/AFMDataClient_MacOS_x64.app.zip
-          asset_name: AFMDataClient_MacOS_x64.app.zip
+          asset_path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-x64/publish/TrimsSilver_MacOS_x64.app.zip
+          asset_name: TrimsSilver_MacOS_x64.app.zip
           asset_content_type: application/zip
 
       - name: Upload Release Asset (macOS .app Bundle arm64)
@@ -309,8 +309,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.AVALONIA_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-arm64/publish/AFMDataClient_MacOS_arm64.app.zip
-          asset_name: AFMDataClient_MacOS_arm64.app.zip
+          asset_path: ./AlbionDataAvalonia.Desktop.MacOS/bin/Release/net10.0/osx-arm64/publish/TrimsSilver_MacOS_arm64.app.zip
+          asset_name: TrimsSilver_MacOS_arm64.app.zip
           asset_content_type: application/zip
 
       - name: Checkout release metadata
@@ -326,7 +326,7 @@ jobs:
           $version = "${{ env.VERSION }}"
           $channel = "${{ env.RELEASE_CHANNEL }}"
           $tag = "${{ env.RELEASE_TAG }}"
-          $repoUrl = "https://github.com/JPCodeCraft/AlbionDataAvalonia"
+          $repoUrl = "https://github.com/Rabhynoide/TrimsSilver-Client"
           $path = "./release-metadata/AlbionDataAvalonia.Desktop/LatestVersion.json"
 
           function New-ReleaseEntry {
@@ -337,7 +337,7 @@ jobs:
 
             return [ordered]@{
               version = $EntryVersion
-              windowsDownloadUrl = "$repoUrl/releases/download/$EntryTag/AFMDataClientSetup_v_$EntryVersion.exe"
+              windowsDownloadUrl = "$repoUrl/releases/download/$EntryTag/TrimsSilverSetup_v_$EntryVersion.exe"
               releasePageUrl = "$repoUrl/releases/tag/$EntryTag"
             }
           }

@@ -206,7 +206,7 @@
                                    Text="{Binding SharingStatus}"
                                    TextWrapping="Wrap"
                                    Opacity="0.8"
-                                   Foreground="{StaticResource AFMOrange}" />
+                                   Foreground="{StaticResource TrimsSilverOrange}" />
                         <TextBlock IsVisible="{Binding HasNormalSharingStatus}"
                                    Text="{Binding SharingStatus}"
                                    TextWrapping="Wrap"

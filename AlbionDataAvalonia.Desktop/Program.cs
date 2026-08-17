@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Serilog;
 using System;
 using System.IO;
@@ -42,7 +42,7 @@ class Program
         {
             var logDir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "AFMDataClient",
+                "TrimsSilver",
                 "logs");
             Directory.CreateDirectory(logDir);
             File.WriteAllText(Path.Combine(logDir, "startup-crash.txt"), exception.ToString());

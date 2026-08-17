@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Auth.Models;
+using AlbionDataAvalonia.Auth.Models;
 using AlbionDataAvalonia.Auth.Services;
 using AlbionDataAvalonia.Locations;
 using AlbionDataAvalonia.Network.Services;
@@ -67,11 +67,11 @@ public partial class MainViewModel : ViewModelBase
     private bool isInitializing = true;
 
     [ObservableProperty]
-    private bool uploadToAfmOnly = false;
+    private bool uploadToTrimsSilverOnly = false;
 
-    partial void OnUploadToAfmOnlyChanged(bool value)
+    partial void OnUploadToTrimsSilverOnlyChanged(bool value)
     {
-        _playerState.UploadToAfmOnly = value;
+        _playerState.UploadToTrimsSilverOnly = value;
     }
 
     [ObservableProperty]
@@ -361,7 +361,7 @@ public partial class MainViewModel : ViewModelBase
         LocationName = e.Location.FriendlyName;
         PlayerName = e.Name;
         AlbionServerName = e.AlbionServer?.Name ?? "Unknown";
-        UploadToAfmOnly = e.UploadToAfmOnly;
+        UploadToTrimsSilverOnly = e.UploadToTrimsSilverOnly;
         ContributeToPublic = e.ContributeToPublic;
         ShareWithFriends = e.ShareWithFriends;
 

@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Auth.Models;
+using AlbionDataAvalonia.Auth.Models;
 using AlbionDataAvalonia.DB;
 using AlbionDataAvalonia.Settings;
 using AlbionDataAvalonia.State;
@@ -214,8 +214,8 @@ namespace AlbionDataAvalonia.Auth.Services
         public void SignInWithGoogle()
         {
             var authUrl = $"https://accounts.google.com/o/oauth2/v2/auth" +
-                          $"?client_id={_settingsManager.AppSettings.AfmAuthClientId}" +
-                          $"&redirect_uri={Uri.EscapeDataString(_settingsManager.AppSettings.AfmAuthRedirectUri)}" +
+                          $"?client_id={_settingsManager.AppSettings.TrimsSilverAuthClientId}" +
+                          $"&redirect_uri={Uri.EscapeDataString(_settingsManager.AppSettings.TrimsSilverAuthRedirectUri)}" +
                           $"&response_type=code" +
                           $"&scope=openid%20email%20profile" +
                           $"&access_type=offline" + // Optional: to get a refresh token
@@ -233,7 +233,7 @@ namespace AlbionDataAvalonia.Auth.Services
 
         private async Task<FirebaseAuthResponse?> GetFirebaseUserAsync(string code, CancellationToken cancellationToken = default)
         {
-            var url = $"{_settingsManager.AppSettings.AfmAuthApiUrl}/tokenFromCode";
+            var url = $"{_settingsManager.AppSettings.TrimsSilverAuthApiUrl}/tokenFromCode";
             var query = $"?code={Uri.EscapeDataString(code)}";
 
             using var client = new HttpClient();
@@ -253,7 +253,7 @@ namespace AlbionDataAvalonia.Auth.Services
 
         private async Task RefreshFirebaseTokenAsync(string refreshToken, CancellationToken cancellationToken = default)
         {
-            var url = $"{_settingsManager.AppSettings.AfmAuthApiUrl}/refreshToken";
+            var url = $"{_settingsManager.AppSettings.TrimsSilverAuthApiUrl}/refreshToken";
             var query = $"?refreshToken={Uri.EscapeDataString(refreshToken)}";
 
             using var client = new HttpClient();
@@ -361,7 +361,7 @@ namespace AlbionDataAvalonia.Auth.Services
         {
             Log.Debug("Listening for the auth redirect...");
             using var listener = new HttpListener();
-            listener.Prefixes.Add(_settingsManager.AppSettings.AfmAuthRedirectUri);
+            listener.Prefixes.Add(_settingsManager.AppSettings.TrimsSilverAuthRedirectUri);
             listener.Start();
 
             try
@@ -481,7 +481,7 @@ namespace AlbionDataAvalonia.Auth.Services
             // Clear the user information
             _firebaseUser = null;
 
-            _playerState.UploadToAfmOnly = false;
+            _playerState.UploadToTrimsSilverOnly = false;
 
             // Clear the table
             var userAuths = await _dbContext.UserAuth.ToListAsync();

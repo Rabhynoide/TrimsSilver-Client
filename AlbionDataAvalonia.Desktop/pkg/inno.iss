@@ -1,11 +1,11 @@
-﻿#define MyAppId "AFMDataClient"
-#define MyAppName "Albion Free Market Data Client"
-#define MyAppPublisher "JP Code Craft"
-#define MyAppPublisherURL "https://www.albionfreemarket.com"
+#define MyAppId "TrimsSilver"
+#define MyAppName "TrimsSilver Data Client"
+#define MyAppPublisher "TrimsSilver"
+#define MyAppPublisherURL "https://trimssilver.trimards-island.org"
 #define MyAppVersion "0.40.0.0"
-#define MyAppExeName "AFMDataClient.exe"
+#define MyAppExeName "TrimsSilver.exe"
 #define MyAppOutputDir "userdocs:Inno Setup Output"
-#define MyAppOutputBaseFilename "AFMDataClientSetup"
+#define MyAppOutputBaseFilename "TrimsSilverSetup"
 #define MyAppSourceDir "..\\bin\\Release\\net10.0-windows\\win-x64\\publish\\*"
 #define MyAppIconFile "..\\bin\\Release\\net10.0-windows\\win-x64\\publish\\Assets\\afm-logo.ico"
 #define MyAppIconFilePath "Assets\afm-logo.ico"
@@ -138,7 +138,7 @@ begin
     RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', '{#MyAppName}');
     if DeleteConfigFiles then
     begin
-      DelTree(ExpandConstant('{localappdata}\AFMDataClient'), True, True, True);
+      DelTree(ExpandConstant('{localappdata}\TrimsSilver'), True, True, True);
     end;
   end;
 end;

@@ -1,7 +1,6 @@
 ﻿using Serilog;
 using System;
 using System.IO;
-using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -12,10 +11,8 @@ public class SettingsManager
     private string deafultUserSettingsFilePath = Path.Combine(AppContext.BaseDirectory, "DefaultUserSettings.json");
     private string defaultAppSettingsFilePath = Path.Combine(AppContext.BaseDirectory, "DefaultAppSettings.json");
 
-    private bool loadedAppSettingsFromRemote = false;
     private readonly WindowsStartupService windowsStartupService;
 
-    private string appSettingsDownloadUrl = "https://cdn.albionfreemarket.com/AlbionDataAvalonia/AlbionDataAvalonia/DefaultAppSettings.json";
     public UserSettings UserSettings { get; } = new();
     public AppSettings AppSettings { get; private set; } = new();
     public SettingsManager(WindowsStartupService windowsStartupService)
@@ -23,16 +20,12 @@ public class SettingsManager
         this.windowsStartupService = windowsStartupService;
     }
 
-    public async Task InitializeSettings()
+    public Task InitializeSettings()
     {
         LoadUserSettings();
         windowsStartupService.Sync(UserSettings.StartWithWindows);
-
-        if (!await TryLoadAppSettingsFromRemoteAsync())
-        {
-            LoadAppSettingsFromLocal();
-            _ = KeepTryingToLoadAppSettingsFromRemoteAsync();
-        }
+        LoadAppSettingsFromLocal();
+        return Task.CompletedTask;
     }
 
 
@@ -111,41 +104,6 @@ public class SettingsManager
             && document.RootElement.TryGetProperty(propertyName, out _);
     }
 
-    private async Task<bool> TryLoadAppSettingsFromRemoteAsync()
-    {
-        // If we are in development mode, use the default settings file
-#if DEBUG
-        return false;
-#endif
-
-        try
-        {
-            using HttpClient client = new HttpClient();
-            string json = await client.GetStringAsync(appSettingsDownloadUrl);
-
-            if (string.IsNullOrEmpty(json))
-            {
-                throw new Exception("Downloaded app settings is null or empty.");
-            }
-
-            var settings = JsonSerializer.Deserialize<AppSettings>(json);
-
-            if (settings != null)
-            {
-                AppSettings = settings;
-                Log.Information("App settings loaded successfully from remote repository.");
-                loadedAppSettingsFromRemote = true;
-                return true;
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.Error($"Error in LoadAppSettingsAsync: {ex}");
-        }
-
-        return false;
-    }
-
     private void LoadAppSettingsFromLocal()
     {
         try
@@ -174,15 +132,6 @@ public class SettingsManager
         {
             Log.Error($"Error in LoadAppSettingsFromLocal: {ex}");
             AppSettings ??= new AppSettings();
-        }
-    }
-
-    private async Task KeepTryingToLoadAppSettingsFromRemoteAsync()
-    {
-        while (!loadedAppSettingsFromRemote)
-        {
-            await Task.Delay(TimeSpan.FromMinutes(AppSettings.AppSettingsRetryLoadIntervalMins));
-            await TryLoadAppSettingsFromRemoteAsync();
         }
     }
 

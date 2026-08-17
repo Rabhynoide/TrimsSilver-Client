@@ -13,20 +13,20 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class NewFurnitureItemEventHandler : EventPacketHandler<NewFurnitureItemEvent>
 {
     private readonly ItemsIdsService itemsIdsService;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
     private readonly ItemEstimatedMarketValueService itemEstimatedMarketValues;
     private readonly LootTrackerService lootTracker;
     private readonly PlayerState playerState;
 
     public NewFurnitureItemEventHandler(
         ItemsIdsService itemsIdsService,
-        AFMUploader afmUploader,
+        TrimsSilverUploader trimsSilverUploader,
         ItemEstimatedMarketValueService itemEstimatedMarketValues,
         LootTrackerService lootTracker,
         PlayerState playerState) : base((int)EventCodes.NewFurnitureItem)
     {
         this.itemsIdsService = itemsIdsService;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.itemEstimatedMarketValues = itemEstimatedMarketValues;
         this.lootTracker = lootTracker;
         this.playerState = playerState;
@@ -57,7 +57,7 @@ public class NewFurnitureItemEventHandler : EventPacketHandler<NewFurnitureItemE
                         value.Item.BlackMarketEstimatedMarketValue);
                 }
 
-                afmUploader.QueueItemEstimatedMarketValue(
+                trimsSilverUploader.QueueItemEstimatedMarketValue(
                     value.Item.ItemUniqueName,
                     value.Item.EstimatedMarketValue,
                     value.Item.Quality,

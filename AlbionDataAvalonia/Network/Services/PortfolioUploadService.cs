@@ -515,7 +515,7 @@ public sealed class PortfolioUploadService : IDisposable
 
     private Uri GetBackendApiBaseUri()
     {
-        return _settingsManager.AppSettings.GetAfmBackendApiBaseUri();
+        return _settingsManager.AppSettings.GetTrimsSilverBackendApiBaseUri();
     }
 
     private static PositionKey? CreatePositionKey(PortfolioTradeImportRequest request)

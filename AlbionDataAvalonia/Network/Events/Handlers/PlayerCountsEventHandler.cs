@@ -1,4 +1,4 @@
-﻿using Albion.Network;
+using Albion.Network;
 using AlbionDataAvalonia.Network.Events;
 using AlbionDataAvalonia.Network.Services;
 using AlbionDataAvalonia.Shared;
@@ -10,12 +10,12 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class PlayerCountsEventHandler : EventPacketHandler<PlayerCountsEvent>
 {
     private readonly PlayerState playerState;
-    private readonly AFMUploader AfmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
 
-    public PlayerCountsEventHandler(PlayerState playerState, AFMUploader aFMUploader) : base((int)EventCodes.PlayerCounts)
+    public PlayerCountsEventHandler(PlayerState playerState, TrimsSilverUploader trimsSilverUploader) : base((int)EventCodes.PlayerCounts)
     {
         this.playerState = playerState;
-        this.AfmUploader = aFMUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
     }
 
     protected override async Task OnActionAsync(PlayerCountsEvent value)
@@ -24,7 +24,7 @@ public class PlayerCountsEventHandler : EventPacketHandler<PlayerCountsEvent>
         {
             value.PlayerCount.Location = playerState.Location;
             value.PlayerCount.Server = playerState.AlbionServer;
-            this.AfmUploader.UploadPlayerCount(value.PlayerCount);
+            this.trimsSilverUploader.UploadPlayerCount(value.PlayerCount);
         }
         await Task.CompletedTask;
     }

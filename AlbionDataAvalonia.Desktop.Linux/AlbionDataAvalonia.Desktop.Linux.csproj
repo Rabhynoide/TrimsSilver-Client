@@ -10,8 +10,8 @@
     <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyTitle>Albion Free Market Data Client</AssemblyTitle>
-    <AssemblyName>AFMDataClient_Linux64</AssemblyName>
+    <AssemblyTitle>TrimsSilver Data Client</AssemblyTitle>
+    <AssemblyName>TrimsSilver_Linux64</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
@@ -34,9 +34,9 @@
       <PublishOutput>
         $(ProjectDir)bin/$(Configuration)/$(TargetFramework)/$(RuntimeIdentifier)/publish</PublishOutput>
     </PropertyGroup>
-    <Copy SourceFiles="$(ProjectDir)install/AFMDataClient_Linux64_Installer.sh" DestinationFolder="$(PublishOutput)" />
-    <Copy SourceFiles="$(ProjectDir)install/AFMDataClient_Linux64_Uninstaller.sh" DestinationFolder="$(PublishOutput)" />
-    <Exec Command="chmod +x $(PublishOutput)/AFMDataClient_Linux64_Installer.sh" Condition=" '$(OS)' == 'Unix' " />
-    <Exec Command="chmod +x $(PublishOutput)/AFMDataClient_Linux64_Uninstaller.sh" Condition=" '$(OS)' == 'Unix' " />
+    <Copy SourceFiles="$(ProjectDir)install/TrimsSilver_Linux64_Installer.sh" DestinationFolder="$(PublishOutput)" />
+    <Copy SourceFiles="$(ProjectDir)install/TrimsSilver_Linux64_Uninstaller.sh" DestinationFolder="$(PublishOutput)" />
+    <Exec Command="chmod +x $(PublishOutput)/TrimsSilver_Linux64_Installer.sh" Condition=" '$(OS)' == 'Unix' " />
+    <Exec Command="chmod +x $(PublishOutput)/TrimsSilver_Linux64_Uninstaller.sh" Condition=" '$(OS)' == 'Unix' " />
   </Target>
 </Project>

@@ -36,8 +36,8 @@ public class ConnectionService : IDisposable
     {
         httpClient.DefaultRequestHeaders.UserAgent.Clear();
         var version = AlbionDataAvalonia.ClientUpdater.GetVersion() ?? "unknown";
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"afmDataClient-v.{version}");
-        httpClient.DefaultRequestHeaders.Referrer = new Uri("https://github.com/JPCodeCraft/AlbionDataAvalonia");
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"trimsSilverDataClient-v.{version}");
+        httpClient.DefaultRequestHeaders.Referrer = new Uri("https://github.com/Rabhynoide/TrimsSilver-Client");
         if (_playerState.AlbionServer != null)
         {
             httpClient.BaseAddress = new Uri(_playerState.AlbionServer.UploadUrl);

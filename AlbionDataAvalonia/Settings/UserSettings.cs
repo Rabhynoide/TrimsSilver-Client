@@ -1,4 +1,4 @@
-﻿namespace AlbionDataAvalonia.Settings;
+namespace AlbionDataAvalonia.Settings;
 
 using Serilog;
 using Serilog.Events;
@@ -196,17 +196,17 @@ public class UserSettings : INotifyPropertyChanged
         }
     }
 
-    private bool uploadSpecsToAfm = true;
-    public bool UploadSpecsToAfm
+    private bool uploadSpecsToTrimsSilver = true;
+    public bool UploadSpecsToTrimsSilver
     {
-        get => uploadSpecsToAfm;
+        get => uploadSpecsToTrimsSilver;
         set
         {
-            if (uploadSpecsToAfm != value)
+            if (uploadSpecsToTrimsSilver != value)
             {
-                uploadSpecsToAfm = value;
-                OnPropertyChanged(nameof(UploadSpecsToAfm));
-                Log.Information("Upload specs to AFM set to {UploadSpecsToAfm}", uploadSpecsToAfm);
+                uploadSpecsToTrimsSilver = value;
+                OnPropertyChanged(nameof(UploadSpecsToTrimsSilver));
+                Log.Information("Upload specs to AFM set to {UploadSpecsToTrimsSilver}", uploadSpecsToTrimsSilver);
             }
         }
     }

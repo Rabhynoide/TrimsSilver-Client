@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Auth.Services;
+using AlbionDataAvalonia.Auth.Services;
 using AlbionDataAvalonia.Combat;
 using AlbionDataAvalonia.DB;
 using AlbionDataAvalonia.Gathering;
@@ -136,7 +136,7 @@ public partial class App : Application
         //GETTING SERVICES
         var listener = services.GetRequiredService<NetworkListenerService>();
         var uploader = services.GetRequiredService<Uploader>();
-        var afmUploader = services.GetRequiredService<AFMUploader>();
+        var trimsSilverUploader = services.GetRequiredService<TrimsSilverUploader>();
         var emvBackendLoader = services.GetRequiredService<ItemEstimatedMarketValueBackendLoader>();
         var mobsService = services.GetRequiredService<MobsService>();
         var itemsIdsService = services.GetRequiredService<ItemsIdsService>();
@@ -146,7 +146,7 @@ public partial class App : Application
         var gatheringTracker = services.GetRequiredService<GatheringTrackerService>();
 
         //CONFIGURE AUTHENTICATED BACKENDS BEFORE VIEWMODELS SUBSCRIBE TO LOGIN CHANGES
-        afmUploader.Initialize();
+        trimsSilverUploader.Initialize();
         emvBackendLoader.Initialize();
 
         //VIEWMODEL AND SHELL
@@ -360,7 +360,7 @@ public partial class App : Application
 
     private void SetupLogging(ListSink listSink)
     {
-        string logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AFMDataClient", "logs", "log-.txt");
+        string logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TrimsSilver", "logs", "log-.txt");
 
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Sink(listSink, restrictedToMinimumLevel: LogEventLevel.Verbose)
@@ -404,7 +404,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<ListSink>();
         collection.AddSingleton<IdleService>();
         collection.AddSingleton<Uploader>();
-        collection.AddSingleton<AFMUploader>();
+        collection.AddSingleton<TrimsSilverUploader>();
         collection.AddSingleton<MailService>();
         collection.AddSingleton<TradeService>();
         collection.AddSingleton<PortfolioUploadService>();

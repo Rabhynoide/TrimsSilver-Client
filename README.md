@@ -1,7 +1,7 @@
-# Albion Free Market Data Client
+# TrimsSilver Data Client
 
-[![Release](https://img.shields.io/github/v/release/JPCodeCraft/AlbionDataAvalonia)](https://github.com/JPCodeCraft/AlbionDataAvalonia/releases)
-[![Downloads](https://img.shields.io/github/downloads/JPCodeCraft/AlbionDataAvalonia/total)](https://tooomm.github.io/github-release-stats/?username=jpcodecraft&repository=AlbionDataAvalonia)
+[![Release](https://img.shields.io/github/v/release/Rabhynoide/TrimsSilver-Client)](https://github.com/Rabhynoide/TrimsSilver-Client/releases)
+[![Downloads](https://img.shields.io/github/downloads/Rabhynoide/TrimsSilver-Client/total)](https://tooomm.github.io/github-release-stats/?username=rabhynoide&repository=TrimsSilver-Client)
 
 ## ⚠️ ATTENTION
 
@@ -46,7 +46,7 @@ An alternative client for [The Albion Online Data Project](https://www.albion-on
 
 ### Windows
 
-1. Navigate to the [releases](https://github.com/JPCodeCraft/AlbionDataAvalonia/releases) section to download the latest installer (`AFMDataClientSetup_v_x.x.x.x.exe`)
+1. Navigate to the [releases](https://github.com/JPCodeCraft/AlbionDataAvalonia/releases) section to download the latest installer (`TrimsSilverSetup_v_x.x.x.x.exe`)
 2. Run the installer and follow the on-screen instructions
 3. After installation, the application will run minimized in the system tray
 4. Click the tray icon to open the user interface
@@ -61,20 +61,20 @@ Use the regular Windows `Uninstall a program` feature to remove the application.
 **Option 1: One-line Installer**
 
 ```bash
-curl -s https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/latest | jq -r '.assets[] | select(.name == "AFMDataClient_Linux64_Installer.sh") | .browser_download_url' | xargs curl -L -o installer.sh && sed -i 's/\r$//' installer.sh && chmod +x installer.sh && ./installer.sh && rm installer.sh
+curl -s https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/latest | jq -r '.assets[] | select(.name == "TrimsSilver_Linux64_Installer.sh") | .browser_download_url' | xargs curl -L -o installer.sh && sed -i 's/\r$//' installer.sh && chmod +x installer.sh && ./installer.sh && rm installer.sh
 ```
 
 **Option 2: Manual Installation**
 
-1. Download `AFMDataClient_Linux64_Installer.sh` from [releases](https://github.com/JPCodeCraft/AlbionDataAvalonia/releases)
-2. Fix line endings: `sed -i 's/\r$//' AFMDataClient_Linux64_Installer.sh`
-3. Make executable: `chmod +x AFMDataClient_Linux64_Installer.sh`
-4. Run the installer: `./AFMDataClient_Linux64_Installer.sh`
+1. Download `TrimsSilver_Linux64_Installer.sh` from [releases](https://github.com/JPCodeCraft/AlbionDataAvalonia/releases)
+2. Fix line endings: `sed -i 's/\r$//' TrimsSilver_Linux64_Installer.sh`
+3. Make executable: `chmod +x TrimsSilver_Linux64_Installer.sh`
+4. Run the installer: `./TrimsSilver_Linux64_Installer.sh`
 
 **Uninstallation**
 
 ```bash
-curl -s https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/latest | jq -r '.assets[] | select(.name == "AFMDataClient_Linux64_Uninstaller.sh") | .browser_download_url' | xargs curl -L -o uninstaller.sh && sed -i 's/\r$//' uninstaller.sh && chmod +x uninstaller.sh && ./uninstaller.sh && rm uninstaller.sh
+curl -s https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/latest | jq -r '.assets[] | select(.name == "TrimsSilver_Linux64_Uninstaller.sh") | .browser_download_url' | xargs curl -L -o uninstaller.sh && sed -i 's/\r$//' uninstaller.sh && chmod +x uninstaller.sh && ./uninstaller.sh && rm uninstaller.sh
 ```
 
 > **Note**: Linux version does not support automatic updates. Run the installer again to update.
@@ -82,15 +82,15 @@ curl -s https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/lat
 
 ### macOS
 
-The macOS version requires macOS 14 or newer. If you are on Apple Silicon, download `AFMDataClient_MacOS_arm64.app.zip`. Intel users should download `AFMDataClient_MacOS_x64.app.zip`.
+The macOS version requires macOS 14 or newer. If you are on Apple Silicon, download `TrimsSilver_MacOS_arm64.app.zip`. Intel users should download `TrimsSilver_MacOS_x64.app.zip`.
 
 <img width="1073" height="643" alt="image" src="https://github.com/user-attachments/assets/ce781ade-d2f9-42c8-ba10-bea77bb0ba13" />
 
-The macOS app is not signed, so macOS may say `"AFMDataClient_MacOS" is damaged and can't be opened`. Remove the download quarantine flag before opening it:
+The macOS app is not signed, so macOS may say `"TrimsSilver_MacOS" is damaged and can't be opened`. Remove the download quarantine flag before opening it:
 
 <img width="244" height="218" alt="image" src="https://github.com/user-attachments/assets/6db17f1c-d119-4fd6-b855-d89f40fde348" />
 
-1. Make sure `AFMDataClient_MacOS.app` is visible in your `Downloads` folder. Safari may extract the zip automatically. If you still see only the `.zip` file, double-click it first.
+1. Make sure `TrimsSilver_MacOS.app` is visible in your `Downloads` folder. Safari may extract the zip automatically. If you still see only the `.zip` file, double-click it first.
 
 <img width="840" height="256" alt="image" src="https://github.com/user-attachments/assets/4c18543a-7da8-4c8c-b4ec-f20a5831e18c" />
    
@@ -110,18 +110,18 @@ The macOS app is not signed, so macOS may say `"AFMDataClient_MacOS" is damaged 
 4. Remove the quarantine flag from the app:
 
    ```bash
-   xattr -dr com.apple.quarantine AFMDataClient_MacOS.app
+   xattr -dr com.apple.quarantine TrimsSilver_MacOS.app
    ```
 <img width="800" height="113" alt="image" src="https://github.com/user-attachments/assets/328bdccf-97a7-4324-974a-68150145ec10" />
 
-5. Drag `AFMDataClient_MacOS.app` into your `Applications` folder.
+5. Drag `TrimsSilver_MacOS.app` into your `Applications` folder.
 
-6. Open `AFMDataClient_MacOS.app` from `Applications`.
+6. Open `TrimsSilver_MacOS.app` from `Applications`.
 
    If double-clicking does not open it, run:
 
    ```bash
-   open /Applications/AFMDataClient_MacOS.app
+   open /Applications/TrimsSilver_MacOS.app
    ```
 
 If packet capture is blocked, the app shows a `Capture Blocked` status.
@@ -146,17 +146,17 @@ AFM checks for new versions and notifies you, but macOS updates must be download
 2. Open Terminal and remove the packet capture permission service:
 
    ```bash
-   sudo /bin/sh "/Applications/AFMDataClient_MacOS.app/Contents/Resources/uninstall-capture-permissions.sh"
+   sudo /bin/sh "/Applications/TrimsSilver_MacOS.app/Contents/Resources/uninstall-capture-permissions.sh"
    ```
 
    If you kept the app somewhere other than `Applications`, adjust the path. The script is safe to run if capture permissions were never installed.
 
-3. Move `AFMDataClient_MacOS.app` from `Applications` to Trash.
+3. Move `TrimsSilver_MacOS.app` from `Applications` to Trash.
 
 The uninstaller preserves your database, backups, settings, and logs. To remove all AFM user data as well, run the following only after confirming that you no longer need those files:
 
 ```bash
-rm -rf "$HOME/Library/Application Support/AFMDataClient"
+rm -rf "$HOME/Library/Application Support/TrimsSilver"
 ```
 
 ## 💻 System Requirements
@@ -246,31 +246,31 @@ All local data (SQLite database, settings, cached files, and automatic backups) 
 **Windows path**
 
 ```
-C:\Users\<username>\AppData\Local\AFMDataClient
+C:\Users\<username>\AppData\Local\TrimsSilver
 ```
 
 **Linux path (default)**
 
 ```
-~/.local/share/AFMDataClient
+~/.local/share/TrimsSilver
 ```
 
 If `$XDG_DATA_HOME` is set, use:
 
 ```
-$XDG_DATA_HOME/AFMDataClient
+$XDG_DATA_HOME/TrimsSilver
 ```
 
 **macOS path (default)**
 
 ```
-~/Library/Application Support/AFMDataClient
+~/Library/Application Support/TrimsSilver
 ```
 
 **Steps**
 
 1. Close AFM (exit from the system tray).
-2. Copy the entire `AFMDataClient` folder from the path above.
+2. Copy the entire `TrimsSilver` folder from the path above.
 3. On the new machine, paste it to the same path.
 4. Start AFM.
 
@@ -287,8 +287,8 @@ Change the `Packets redirection method` to `Legacy - NDIS` in your ExitLag app u
 
 ## 👨‍💻 Credits
 
-This software was developed by [JP CodeCraft](https://jpcodecraft.com/), the developer behind [Albion Free Market](https://albionfreemarket.com/).
+TrimsSilver is a fork of the [AFM Data Client](https://github.com/JPCodeCraft/AlbionDataAvalonia) originally developed by [JP CodeCraft](https://jpcodecraft.com/) for [Albion Free Market](https://albionfreemarket.com/). It is no longer affiliated with or endorsed by JP CodeCraft or Albion Free Market; see the [original repository](https://github.com/JPCodeCraft/AlbionDataAvalonia) and [LICENSE](LICENSE) for the terms this fork is distributed under.
 
 ## 📊 Download Statistics
 
-View detailed download statistics [here](https://tooomm.github.io/github-release-stats/?username=jpcodecraft&repository=AlbionDataAvalonia).
+View detailed download statistics [here](https://tooomm.github.io/github-release-stats/?username=rabhynoide&repository=TrimsSilver-Client).

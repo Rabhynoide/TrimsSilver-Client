@@ -1,10 +1,10 @@
 #!/bin/bash
 
-TARGET_FOLDER="$HOME/AFMDataClient/"
+TARGET_FOLDER="$HOME/TrimsSilver/"
 AUTO_START_FOLDER="/etc/xdg/autostart/"
 AUTO_START_FILE="afmdataclient.desktop"
-LOCAL_APP_DATA_FOLDER="$HOME/.local/share/AFMDataClient"
-APP_NAME="AFMDataClient_Linux64"
+LOCAL_APP_DATA_FOLDER="$HOME/.local/share/TrimsSilver"
+APP_NAME="TrimsSilver_Linux64"
 
 echo "Welcome to the Albion Data Client uninstallation script!"
 

@@ -6,11 +6,11 @@
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
 	<Application.Resources>
-		<SolidColorBrush Color="#5D4037" x:Key="AFMBrown" />
-		<SolidColorBrush Color="#EFEBE9" x:Key="AFMLightBrown" />
-		<SolidColorBrush Color="#FFA726" x:Key="AFMOrange" />
-		<SolidColorBrush Color="#FF7043" x:Key="AFMRed" />
-		<SolidColorBrush Color="rgb(48,48,48)" x:Key="AFMDarkBackground" />
+		<SolidColorBrush Color="#5D4037" x:Key="TrimsSilverBrown" />
+		<SolidColorBrush Color="#EFEBE9" x:Key="TrimsSilverLightBrown" />
+		<SolidColorBrush Color="#FFA726" x:Key="TrimsSilverOrange" />
+		<SolidColorBrush Color="#FF7043" x:Key="TrimsSilverRed" />
+		<SolidColorBrush Color="rgb(48,48,48)" x:Key="TrimsSilverDarkBackground" />
 	</Application.Resources>
 	
 	<Application.Styles>

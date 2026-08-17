@@ -9,7 +9,7 @@
   "MaxLogCount": 1000,
   "MailsPerPage": 1000,
   "TradesToShow": 1000,
-  "UploadSpecsToAfm": true,
+  "UploadSpecsToTrimsSilver": true,
   "DisableCombatTracker": false,
   "DisableGatheringTracker": false,
   "DisableLootTracker": false,

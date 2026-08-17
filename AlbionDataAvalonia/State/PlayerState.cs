@@ -1,4 +1,4 @@
-﻿using AlbionDataAvalonia.Locations;
+using AlbionDataAvalonia.Locations;
 using AlbionDataAvalonia.Locations.Models;
 using AlbionDataAvalonia.Network.Events;
 using AlbionDataAvalonia.Network.Models;
@@ -19,7 +19,7 @@ namespace AlbionDataAvalonia.State
         private bool isInGame = false;
         private bool hasEncryptedData = false;
 
-        private bool uploadToAfmOnly = false;
+        private bool uploadToTrimsSilverOnly = false;
         private bool contributeToPublic = false;
         private bool shareWithFriends = false;
         private readonly object banditEventLock = new();
@@ -91,13 +91,13 @@ namespace AlbionDataAvalonia.State
                 InvokePlayerStateChanged();
             }
         }
-        public bool UploadToAfmOnly
+        public bool UploadToTrimsSilverOnly
         {
-            get => uploadToAfmOnly;
+            get => uploadToTrimsSilverOnly;
             set
             {
-                if (uploadToAfmOnly == value) return;
-                uploadToAfmOnly = value;
+                if (uploadToTrimsSilverOnly == value) return;
+                uploadToTrimsSilverOnly = value;
                 InvokePlayerStateChanged();
             }
         }
@@ -153,7 +153,7 @@ namespace AlbionDataAvalonia.State
 
         private void InvokePlayerStateChanged()
         {
-            OnPlayerStateChanged?.Invoke(this, new PlayerStateEventArgs(Location, PlayerName, AlbionServer, IsInGame, HasEncryptedData, UploadToAfmOnly, ContributeToPublic, ShareWithFriends));
+            OnPlayerStateChanged?.Invoke(this, new PlayerStateEventArgs(Location, PlayerName, AlbionServer, IsInGame, HasEncryptedData, UploadToTrimsSilverOnly, ContributeToPublic, ShareWithFriends));
         }
 
         public PlayerState()

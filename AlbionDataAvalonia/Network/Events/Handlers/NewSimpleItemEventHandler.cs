@@ -14,7 +14,7 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class NewSimpleItemEventHandler : EventPacketHandler<NewSimpleItemEvent>
 {
     private readonly ItemsIdsService itemsIdsService;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
     private readonly ItemEstimatedMarketValueService itemEstimatedMarketValues;
     private readonly GatheringTrackerService gatheringTracker;
     private readonly LootTrackerService lootTracker;
@@ -22,14 +22,14 @@ public class NewSimpleItemEventHandler : EventPacketHandler<NewSimpleItemEvent>
 
     public NewSimpleItemEventHandler(
         ItemsIdsService itemsIdsService,
-        AFMUploader afmUploader,
+        TrimsSilverUploader trimsSilverUploader,
         ItemEstimatedMarketValueService itemEstimatedMarketValues,
         GatheringTrackerService gatheringTracker,
         LootTrackerService lootTracker,
         PlayerState playerState) : base((int)EventCodes.NewSimpleItem)
     {
         this.itemsIdsService = itemsIdsService;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.itemEstimatedMarketValues = itemEstimatedMarketValues;
         this.gatheringTracker = gatheringTracker;
         this.lootTracker = lootTracker;
@@ -61,7 +61,7 @@ public class NewSimpleItemEventHandler : EventPacketHandler<NewSimpleItemEvent>
                         value.Item.BlackMarketEstimatedMarketValue);
                 }
 
-                afmUploader.QueueItemEstimatedMarketValue(
+                trimsSilverUploader.QueueItemEstimatedMarketValue(
                     value.Item.ItemUniqueName,
                     value.Item.EstimatedMarketValue,
                     value.Item.Quality,

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 REPO_API_URL="https://api.github.com/repos/JPCodeCraft/AlbionDataAvalonia/releases/latest"
-TARGET_FOLDER="$HOME/AFMDataClient/"
-FILE_NAME="AFMDataClient_Linux64"
+TARGET_FOLDER="$HOME/TrimsSilver/"
+FILE_NAME="TrimsSilver_Linux64"
 FULL_PATH="$TARGET_FOLDER$FILE_NAME"
 AUTO_START_FOLDER="/etc/xdg/autostart/"
 AUTO_START_FILE="afmdataclient.desktop"
-APP_NAME="AFMDataClient_Linux64"
+APP_NAME="TrimsSilver_Linux64"
 
 echo "Welcome to the Albion Data Client installation / update script!"
 
@@ -69,8 +69,8 @@ Exec=$FULL_PATH
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=AFMDataClient
-Name=AFMDataClient
+Name[en_US]=TrimsSilver
+Name=TrimsSilver
 Comment[en_US]=Albion Data Client
 Comment=Albion Data Client" >$AUTO_START_FILE
 

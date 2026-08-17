@@ -38,7 +38,7 @@
 		</Style>
 
 		<Style Selector="Label.Orange">
-			<Setter Property="Foreground" Value="{StaticResource AFMOrange}" />
+			<Setter Property="Foreground" Value="{StaticResource TrimsSilverOrange}" />
 		</Style>
 		<Style Selector="Border.SectionCard">
 			<Setter Property="Padding" Value="12" />
@@ -89,7 +89,7 @@
 			<Setter Property="Margin" Value="4" />
 		</Style>
 		<Style Selector="Border.PrivateOrdersCard.PrivateFlipsGlow">
-			<Setter Property="BorderBrush" Value="{StaticResource AFMOrange}" />
+			<Setter Property="BorderBrush" Value="{StaticResource TrimsSilverOrange}" />
 			<Setter Property="Background" Value="rgba(255,167,38,0.12)" />
 			<Setter Property="BoxShadow" Value="0 0 10 1 #8CFFA726" />
 		</Style>
@@ -184,20 +184,20 @@
 					Spacing="4">
 					<TextBlock
 						FontWeight="Bold"
-						Foreground="{StaticResource AFMOrange}"
+						Foreground="{StaticResource TrimsSilverOrange}"
 						Text="Your market orders are encrypted! Go to"
 						TextAlignment="Center"
 						TextWrapping="Wrap" />
 					<TextBlock
 						Cursor="Hand"
 						FontWeight="Bold"
-						Foreground="{StaticResource AFMOrange}"
+						Foreground="{StaticResource TrimsSilverOrange}"
 						PointerReleased="AFMDiscordLink_PointerReleased"
 						Text="AFM Discord"
 						TextDecorations="Underline" />
 					<TextBlock
 						FontWeight="Bold"
-						Foreground="{StaticResource AFMOrange}"
+						Foreground="{StaticResource TrimsSilverOrange}"
 						Text="to understand what's going on."
 						TextAlignment="Center"
 						TextWrapping="Wrap" />
@@ -322,7 +322,7 @@
 								VerticalAlignment="Center"
 								Cursor="Hand"
 								FontSize="14"
-								Foreground="{StaticResource AFMOrange}"
+								Foreground="{StaticResource TrimsSilverOrange}"
 								PointerReleased="NpcapLink_PointerReleased"
 								Text="https://npcap.com/#download"
 								TextDecorations="Underline" />
@@ -341,7 +341,7 @@
 								VerticalAlignment="Center"
 								Cursor="Hand"
 								FontSize="14"
-								Foreground="{StaticResource AFMOrange}"
+								Foreground="{StaticResource TrimsSilverOrange}"
 								PointerReleased="AFMDiscordLink_PointerReleased"
 								Text="Discord"
 								TextDecorations="Underline" />
@@ -378,7 +378,7 @@
 					<WrapPanel HorizontalAlignment="Center" ItemsAlignment="Center">
 						<Border
 							Classes="StatCard"
-							Classes.DimmedUploadCard="{Binding UploadToAfmOnly}">
+							Classes.DimmedUploadCard="{Binding UploadToTrimsSilverOnly}">
 							<StackPanel Spacing="4">
 								<TextBlock Classes="StatLabel" Text="Market Offers" />
 								<TextBlock Classes="StatValue" Text="{Binding PublicUploadedMarketOffersCount, StringFormat=N0}" />
@@ -386,7 +386,7 @@
 						</Border>
 						<Border
 							Classes="StatCard"
-							Classes.DimmedUploadCard="{Binding UploadToAfmOnly}">
+							Classes.DimmedUploadCard="{Binding UploadToTrimsSilverOnly}">
 							<StackPanel Spacing="4">
 								<TextBlock Classes="StatLabel" Text="Market Requests" />
 								<TextBlock Classes="StatValue" Text="{Binding PublicUploadedMarketRequestsCount, StringFormat=N0}" />
@@ -456,8 +456,8 @@
 					<WrapPanel HorizontalAlignment="Center" ItemsAlignment="Center">
 						<Border
 							Classes="StatCard PrivateOrdersCard"
-							Classes.PrivateFlipsGlow="{Binding UploadToAfmOnly}"
-							Classes.DimmedUploadCard="{Binding !UploadToAfmOnly}">
+							Classes.PrivateFlipsGlow="{Binding UploadToTrimsSilverOnly}"
+							Classes.DimmedUploadCard="{Binding !UploadToTrimsSilverOnly}">
 							<StackPanel Spacing="4">
 								<TextBlock Classes="StatLabel" Text="Market Offers" />
 								<TextBlock Classes="StatValue" Text="{Binding PrivateUploadedMarketOffersCount, StringFormat=N0}" />
@@ -465,8 +465,8 @@
 						</Border>
 						<Border
 							Classes="StatCard PrivateOrdersCard"
-							Classes.PrivateFlipsGlow="{Binding UploadToAfmOnly}"
-							Classes.DimmedUploadCard="{Binding !UploadToAfmOnly}">
+							Classes.PrivateFlipsGlow="{Binding UploadToTrimsSilverOnly}"
+							Classes.DimmedUploadCard="{Binding !UploadToTrimsSilverOnly}">
 							<StackPanel Spacing="4">
 								<TextBlock Classes="StatLabel" Text="Market Requests" />
 								<TextBlock Classes="StatValue" Text="{Binding PrivateUploadedMarketRequestsCount, StringFormat=N0}" />

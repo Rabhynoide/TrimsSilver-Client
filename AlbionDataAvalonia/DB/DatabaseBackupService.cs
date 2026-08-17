@@ -16,9 +16,9 @@ namespace AlbionDataAvalonia.DB;
 
 public sealed class DatabaseBackupService : IDisposable
 {
-    private const string BackupFilePrefix = "afmdataclient-backup-";
+    private const string BackupFilePrefix = "trimssilver-backup-";
     private const string BackupTimestampFormat = "yyyyMMdd'T'HHmmss'Z'";
-    private const string DatabaseArchiveEntryName = "afmdataclient.db";
+    private const string DatabaseArchiveEntryName = "trimssilver.db";
     private static readonly TimeSpan BackupInterval = TimeSpan.FromDays(1);
     private static readonly TimeSpan BackupRetryInterval = TimeSpan.FromHours(1);
     private static readonly TimeSpan[] RetentionTargetAges =

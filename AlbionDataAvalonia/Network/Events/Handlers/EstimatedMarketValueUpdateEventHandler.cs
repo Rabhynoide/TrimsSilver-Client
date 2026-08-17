@@ -12,18 +12,18 @@ namespace AlbionDataAvalonia.Network.Handlers;
 public class EstimatedMarketValueUpdateEventHandler : EventPacketHandler<EstimatedMarketValueUpdateEvent>
 {
     private readonly ItemsIdsService itemsIdsService;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
     private readonly ItemEstimatedMarketValueService itemEstimatedMarketValues;
     private readonly PlayerState playerState;
 
     public EstimatedMarketValueUpdateEventHandler(
         ItemsIdsService itemsIdsService,
-        AFMUploader afmUploader,
+        TrimsSilverUploader trimsSilverUploader,
         ItemEstimatedMarketValueService itemEstimatedMarketValues,
         PlayerState playerState) : base((int)EventCodes.EstimatedMarketValueUpdate)
     {
         this.itemsIdsService = itemsIdsService;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.itemEstimatedMarketValues = itemEstimatedMarketValues;
         this.playerState = playerState;
     }
@@ -45,7 +45,7 @@ public class EstimatedMarketValueUpdateEventHandler : EventPacketHandler<Estimat
 
             itemEstimatedMarketValues.Update(serverId.Value, entry.ItemId, entry.Quality, entry.EstimatedMarketValue);
 
-            afmUploader.QueueItemEstimatedMarketValue(
+            trimsSilverUploader.QueueItemEstimatedMarketValue(
                 entry.ItemUniqueName,
                 entry.EstimatedMarketValue,
                 entry.Quality);

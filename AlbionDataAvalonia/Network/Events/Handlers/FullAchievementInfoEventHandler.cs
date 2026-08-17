@@ -1,4 +1,4 @@
-﻿using Albion.Network;
+using Albion.Network;
 using AlbionDataAvalonia.Items.Services;
 using AlbionDataAvalonia.Network.Events;
 using AlbionDataAvalonia.Network.Models;
@@ -17,20 +17,20 @@ public class FullAchievementInfoEventHandler : EventPacketHandler<FullAchievemen
 {
     private readonly AchievementsService achievementsService;
     private readonly PlayerState playerState;
-    private readonly AFMUploader afmUploader;
+    private readonly TrimsSilverUploader trimsSilverUploader;
     private readonly SettingsManager settingsManager;
 
-    public FullAchievementInfoEventHandler(AchievementsService achievementsService, PlayerState playerState, AFMUploader afmUploader, SettingsManager settingsManager) : base((int)EventCodes.FullAchievementInfo)
+    public FullAchievementInfoEventHandler(AchievementsService achievementsService, PlayerState playerState, TrimsSilverUploader trimsSilverUploader, SettingsManager settingsManager) : base((int)EventCodes.FullAchievementInfo)
     {
         this.achievementsService = achievementsService;
         this.playerState = playerState;
-        this.afmUploader = afmUploader;
+        this.trimsSilverUploader = trimsSilverUploader;
         this.settingsManager = settingsManager;
     }
 
     protected override async Task OnActionAsync(FullAchievementInfoEvent value)
     {
-        if (!settingsManager.UserSettings.UploadSpecsToAfm)
+        if (!settingsManager.UserSettings.UploadSpecsToTrimsSilver)
         {
             await Task.CompletedTask;
             Log.Debug("Not uploading achievements, upload to AFM is disabled in settings.");
@@ -98,7 +98,7 @@ public class FullAchievementInfoEventHandler : EventPacketHandler<FullAchievemen
             Achievements = achievements
         };
 
-        afmUploader.UploadAchievements(upload);
+        trimsSilverUploader.UploadAchievements(upload);
 
         await Task.CompletedTask;
     }
