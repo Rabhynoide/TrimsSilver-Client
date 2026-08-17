@@ -17,6 +17,6 @@
   "TrimsSilverAuthRedirectUri": "http://localhost:5000/",
   "TrimsSilverBackendApiBase": "https://api.albionfreemarket.com/be",
   "TrimsSilverTopItemsApiBase": "https://api.albionfreemarket.com",
-  "TrimsSilverIngestApiBase": "https://ingest.albionfreemarket.com",
+  "TrimsSilverIngestApiBase": "https://trimssilver.trimards-island.org/api/",
   "ItemsToUploadToTrimsSilver": ["_ALCHEMY_EXTRACT_", "_FISHSAUCE_", "_RUNE", "_SOUL", "_RELIC"]
 }
