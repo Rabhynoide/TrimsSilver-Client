@@ -4,23 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace AlbionDataAvalonia.Auth.Models;
 
-public class FirebaseDecodedToken
-{
-    [JsonPropertyName("email")]
-    public string Email { get; set; }
-
-    [JsonPropertyName("email_verified")]
-    public bool EmailVerified { get; set; }
-
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
-    [JsonPropertyName("picture")]
-    public string Picture { get; set; }
-
-    [JsonPropertyName("uid")]
-    public string Uid { get; set; }
-}
-
+// Holds the signed-in user's identity + bearer token. Named FirebaseAuthResponse for now
+// since that's still the name every consumer (ViewModels, uploaders) binds to — a pure
+// rename is deferred alongside the other leftover AFM/Firebase-branded strings/UI text.
 public class FirebaseAuthResponse
 {
     [JsonPropertyName("localId")]
@@ -43,9 +29,6 @@ public class FirebaseAuthResponse
 
     [JsonPropertyName("refreshToken")]
     public string RefreshToken { get; set; }
-
-    [JsonPropertyName("expiresIn")]
-    public string ExpiresIn { get; set; }
 
     [JsonIgnore]
     public string Initials => !string.IsNullOrEmpty(FullName)

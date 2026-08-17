@@ -6,24 +6,24 @@ namespace AlbionDataAvalonia.Auth.Services
     public class AuthServiceException : Exception
     {
         public HttpStatusCode? StatusCode { get; }
-        public bool IsInvalidRefreshToken { get; }
+        public bool IsInvalidToken { get; }
 
-        public AuthServiceException(string message, HttpStatusCode? statusCode = null, bool isInvalidRefreshToken = false, Exception? innerException = null)
+        public AuthServiceException(string message, HttpStatusCode? statusCode = null, bool isInvalidToken = false, Exception? innerException = null)
             : base(message, innerException)
         {
             StatusCode = statusCode;
-            IsInvalidRefreshToken = isInvalidRefreshToken;
+            IsInvalidToken = isInvalidToken;
         }
 
-        public static AuthServiceException RefreshTokenError(HttpStatusCode statusCode, string responseBody)
+        public static AuthServiceException TokenRejectedError(HttpStatusCode statusCode, string responseBody)
         {
-            var isInvalid = statusCode == HttpStatusCode.BadRequest || statusCode == HttpStatusCode.Unauthorized;
-            return new AuthServiceException($"Failed to refresh Firebase token: {statusCode}, {responseBody}", statusCode, isInvalid);
+            var isInvalid = statusCode == HttpStatusCode.Unauthorized;
+            return new AuthServiceException($"TrimsSilver server rejected the stored token: {statusCode}, {responseBody}", statusCode, isInvalid);
         }
 
-        public static AuthServiceException TokenExchangeError(HttpStatusCode statusCode, string responseBody)
+        public static AuthServiceException ProfileFetchError(HttpStatusCode statusCode, string responseBody)
         {
-            return new AuthServiceException($"Failed to get Firebase token from auth code: {statusCode}, {responseBody}", statusCode);
+            return new AuthServiceException($"Failed to fetch TrimsSilver profile: {statusCode}, {responseBody}", statusCode);
         }
     }
 }

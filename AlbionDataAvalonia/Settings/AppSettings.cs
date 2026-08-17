@@ -19,9 +19,8 @@ public class AppSettings
     public int NetworkDevicesIdleMinutes { get; set; }
     public int NetworkDevicesIdleCheckMinutes { get; set; }
 
-    public string TrimsSilverAuthClientId { get; set; } = string.Empty;
+    public string TrimsSilverAuthUrl { get; set; } = string.Empty;
     public string TrimsSilverAuthRedirectUri { get; set; } = string.Empty;
-    public string TrimsSilverAuthApiUrl { get; set; } = string.Empty;
     public string TrimsSilverBackendApiBase { get; set; } = string.Empty;
     public string TrimsSilverTopItemsApiBase { get; set; } = string.Empty;
     public string TrimsSilverIngestApiBase { get; set; } = string.Empty;
