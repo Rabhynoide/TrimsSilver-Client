@@ -305,8 +305,8 @@
 								<StackPanel>
 									<CheckBox IsChecked="{Binding ContributeToPublic}"
 										IsEnabled="{Binding UploadToTrimsSilverOnly}"
-										ToolTip.Tip="Adds your private market order uploads to AFM public flip data, so other AFM users can benefit from those prices. Turn this off if the upload should stay private."
-										Margin="0,0,0,5" FontSize="11">Share with Other AFM Users</CheckBox>
+										ToolTip.Tip="Adds your private market order uploads to TrimsSilver public flip data, so other TrimsSilver users can benefit from those prices. Turn this off if the upload should stay private."
+										Margin="0,0,0,5" FontSize="11">Share with Other TrimsSilver Users</CheckBox>
 									<CheckBox IsChecked="{Binding ShareWithFriends}"
 										IsEnabled="{Binding UploadToTrimsSilverOnly}"
 										ToolTip.Tip="Shares your private market order uploads with people in your Sharing list, but only when they added you too. Set up your friends in Settings > Sharing. Recipients get the orders in their private flip data as if they uploaded them."
@@ -314,8 +314,8 @@
 								</StackPanel>
 							</Border>
 							<CheckBox IsChecked="{Binding UserSettings.UploadSpecsToTrimsSilver}"
-								ToolTip.Tip="If you mark this, your character specs will be uploaded to AFM."
-								Margin="0,0,0,5" FontSize="11">Upload Specs to AFM</CheckBox>
+								ToolTip.Tip="If you mark this, your character specs will be uploaded to TrimsSilver."
+								Margin="0,0,0,5" FontSize="11">Upload Specs to TrimsSilver</CheckBox>
 						</StackPanel>
 
 						<!-- Logout button -->

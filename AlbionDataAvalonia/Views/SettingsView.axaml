@@ -29,7 +29,7 @@
                     </WrapPanel>
 
                     <StackPanel Spacing="8">
-                        <TextBlock Text="When AFM Data Client starts:" />
+                        <TextBlock Text="When TrimsSilver Data Client starts:" />
                         <WrapPanel Orientation="Horizontal">
                             <RadioButton Content="Display main window"
                                          GroupName="StartupWindowMode"
@@ -314,7 +314,7 @@
                     <TextBlock Text="Automatic database backups"
                                FontWeight="Bold"
                                FontSize="16" />
-                    <TextBlock Text="AFM Data Client creates a compressed backup every 24 hours. It keeps the three newest backups plus recovery points closest to 5, 10, and 15 days old."
+                    <TextBlock Text="TrimsSilver Data Client creates a compressed backup every 24 hours. It keeps the three newest backups plus recovery points closest to 5, 10, and 15 days old."
                                TextWrapping="Wrap" />
 
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
@@ -346,7 +346,7 @@
                         <TextBlock Text="How to restore a backup"
                                    FontWeight="Bold"
                                    FontSize="16" />
-                        <TextBlock Text="1. Exit AFM from the system tray and confirm that it is no longer running."
+                        <TextBlock Text="1. Exit TrimsSilver from the system tray and confirm that it is no longer running."
                                    TextWrapping="Wrap" />
                         <TextBlock Text="2. Make a safety copy of the current data folder:"
                                    TextWrapping="Wrap" />
@@ -354,13 +354,13 @@
                                    Margin="20,0,0,0"
                                    TextWrapping="Wrap"
                                    Opacity="0.8" />
-                        <TextBlock Text="3. Extract the selected backup ZIP. It contains afmdataclient.db."
+                        <TextBlock Text="3. Extract the selected backup ZIP. It contains trimssilver.db."
                                    TextWrapping="Wrap" />
-                        <TextBlock Text="4. In the data folder, move aside afmdataclient.db and any afmdataclient.db-wal or afmdataclient.db-shm files."
+                        <TextBlock Text="4. In the data folder, move aside trimssilver.db and any trimssilver.db-wal or trimssilver.db-shm files."
                                    TextWrapping="Wrap" />
-                        <TextBlock Text="5. Copy the extracted afmdataclient.db into the data folder."
+                        <TextBlock Text="5. Copy the extracted trimssilver.db into the data folder."
                                    TextWrapping="Wrap" />
-                        <TextBlock Text="6. Start AFM, verify the restored history, and sign in again."
+                        <TextBlock Text="6. Start TrimsSilver, verify the restored history, and sign in again."
                                    TextWrapping="Wrap" />
                     </StackPanel>
 

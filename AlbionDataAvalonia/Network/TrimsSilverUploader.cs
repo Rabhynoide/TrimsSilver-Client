@@ -108,18 +108,18 @@ namespace AlbionDataAvalonia.Network.Services
                             Log.Warning("Failed to set X-User-Id header due to validation.");
                         }
 
-                        Log.Debug("Set AFM upload auth header for user");
+                        Log.Debug("Set TrimsSilver upload auth header for user");
                     }
                     else
                     {
                         httpClient.DefaultRequestHeaders.Authorization = null;
                         httpClient.DefaultRequestHeaders.Remove("X-User-Id");
-                        Log.Debug("Cleared AFM upload auth header, since no user is logged in");
+                        Log.Debug("Cleared TrimsSilver upload auth header, since no user is logged in");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, "Error while updating AFM upload auth header; clearing headers as a fallback.");
+                    Log.Error(ex, "Error while updating TrimsSilver upload auth header; clearing headers as a fallback.");
                     httpClient.DefaultRequestHeaders.Authorization = null;
                     httpClient.DefaultRequestHeaders.Remove("X-User-Id");
                 }
@@ -192,7 +192,7 @@ namespace AlbionDataAvalonia.Network.Services
 
                 if (requestUri is null)
                 {
-                    Log.Error("Cannot upload market order because AFM base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. Offers: {Offers}. Requests: {Requests}.", identifier, _playerState.AlbionServer.Id, marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer), marketUpload.Orders.Count(x => x.AuctionType == AuctionType.request));
+                    Log.Error("Cannot upload market order because TrimsSilver base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. Offers: {Offers}. Requests: {Requests}.", identifier, _playerState.AlbionServer.Id, marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer), marketUpload.Orders.Count(x => x.AuctionType == AuctionType.request));
                     return UploadStatus.Failed;
                 }
 
@@ -217,7 +217,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "AFM market order upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver market order upload returned unauthorized. Attempting token refresh.",
                             marketUploadSummary: GetMarketUploadSummary(marketUpload),
                             serverId: _playerState.AlbionServer.Id);
 
@@ -227,7 +227,7 @@ namespace AlbionDataAvalonia.Network.Services
                         var recovered = await _authService.TryRecoverFromUnauthorizedAsync();
                         if (!recovered)
                         {
-                            Log.Error("AFM market order upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. {MarketUploadSummary}", identifier, _playerState.AlbionServer.Id, GetMarketUploadSummary(marketUpload));
+                            Log.Error("TrimsSilver market order upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. {MarketUploadSummary}", identifier, _playerState.AlbionServer.Id, GetMarketUploadSummary(marketUpload));
                             return UploadStatus.Failed;
                         }
 
@@ -240,7 +240,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 identifier,
                                 response,
-                                "AFM market order upload unauthorized after retry.",
+                                "TrimsSilver market order upload unauthorized after retry.",
                                 marketUploadSummary: GetMarketUploadSummary(marketUpload),
                                 serverId: _playerState.AlbionServer.Id);
 
@@ -255,7 +255,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "HTTP error while uploading market order to AFM.",
+                            "HTTP error while uploading market order to TrimsSilver.",
                             marketUploadSummary: GetMarketUploadSummary(marketUpload),
                             serverId: _playerState.AlbionServer.Id);
 
@@ -370,7 +370,7 @@ namespace AlbionDataAvalonia.Network.Services
         {
             if (requestUri is null)
             {
-                Log.Error("Cannot access private order shares because AFM base address is not initialized.");
+                Log.Error("Cannot access private order shares because TrimsSilver base address is not initialized.");
                 return false;
             }
 
@@ -745,7 +745,7 @@ namespace AlbionDataAvalonia.Network.Services
 
                 if (requestUri is null)
                 {
-                    Log.Error("Cannot upload item estimated market values because AFM base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. ItemsCount: {ItemsCount}.", identifier, itemEstimatedMarketValueUpload.ServerId, itemEstimatedMarketValueUpload.Items.Count);
+                    Log.Error("Cannot upload item estimated market values because TrimsSilver base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. ItemsCount: {ItemsCount}.", identifier, itemEstimatedMarketValueUpload.ServerId, itemEstimatedMarketValueUpload.Items.Count);
                     return ReportStatus(UploadStatus.Failed);
                 }
 
@@ -773,7 +773,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "AFM item estimated market values upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver item estimated market values upload returned unauthorized. Attempting token refresh.",
                             itemEstimatedMarketValueSummary: GetItemEstimatedMarketValueUploadSummary(itemEstimatedMarketValueUpload),
                             serverId: itemEstimatedMarketValueUpload.ServerId);
 
@@ -783,7 +783,7 @@ namespace AlbionDataAvalonia.Network.Services
                         var recovered = await _authService.TryRecoverFromUnauthorizedAsync();
                         if (!recovered)
                         {
-                            Log.Error("AFM item estimated market values upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. {ItemEstimatedMarketValueSummary}", identifier, itemEstimatedMarketValueUpload.ServerId, GetItemEstimatedMarketValueUploadSummary(itemEstimatedMarketValueUpload));
+                            Log.Error("TrimsSilver item estimated market values upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. {ItemEstimatedMarketValueSummary}", identifier, itemEstimatedMarketValueUpload.ServerId, GetItemEstimatedMarketValueUploadSummary(itemEstimatedMarketValueUpload));
                             return ReportStatus(UploadStatus.Failed);
                         }
 
@@ -796,7 +796,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 identifier,
                                 response,
-                                "AFM item estimated market values upload unauthorized after retry.",
+                                "TrimsSilver item estimated market values upload unauthorized after retry.",
                                 itemEstimatedMarketValueSummary: GetItemEstimatedMarketValueUploadSummary(itemEstimatedMarketValueUpload),
                                 serverId: itemEstimatedMarketValueUpload.ServerId);
 
@@ -811,7 +811,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "HTTP error while uploading item estimated market values to AFM.",
+                            "HTTP error while uploading item estimated market values to TrimsSilver.",
                             itemEstimatedMarketValueSummary: GetItemEstimatedMarketValueUploadSummary(itemEstimatedMarketValueUpload),
                             serverId: itemEstimatedMarketValueUpload.ServerId);
 
@@ -829,7 +829,7 @@ namespace AlbionDataAvalonia.Network.Services
                             item.BlackMarketEmv));
                     }
 
-                    Log.Information("Successfully sent {ItemsCount} item estimated market values to AFM EMV endpoint. Identifier: {Identifier}. ServerId: {ServerId}.", itemEstimatedMarketValueUpload.Items.Count, identifier, itemEstimatedMarketValueUpload.ServerId);
+                    Log.Information("Successfully sent {ItemsCount} item estimated market values to TrimsSilver EMV endpoint. Identifier: {Identifier}. ServerId: {ServerId}.", itemEstimatedMarketValueUpload.Items.Count, identifier, itemEstimatedMarketValueUpload.ServerId);
                     return ReportStatus(UploadStatus.Success);
                 }
                 finally
@@ -858,7 +858,7 @@ namespace AlbionDataAvalonia.Network.Services
             {
                 if (requestUri is null)
                 {
-                    Log.Error("Cannot upload player count because AFM base address is not initialized. {PlayerCountSummary}", GetPlayerCountSummary(playerCount));
+                    Log.Error("Cannot upload player count because TrimsSilver base address is not initialized. {PlayerCountSummary}", GetPlayerCountSummary(playerCount));
                     return;
                 }
 
@@ -886,7 +886,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             Guid.Empty,
                             response,
-                            "AFM player count upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver player count upload returned unauthorized. Attempting token refresh.",
                             playerCountSummary: GetPlayerCountSummary(playerCount),
                             serverId: playerCount.Server?.Id);
 
@@ -896,7 +896,7 @@ namespace AlbionDataAvalonia.Network.Services
                         var recovered = await _authService.TryRecoverFromUnauthorizedAsync();
                         if (!recovered)
                         {
-                            Log.Error("AFM player count upload could not recover from unauthorized response. {PlayerCountSummary}", GetPlayerCountSummary(playerCount));
+                            Log.Error("TrimsSilver player count upload could not recover from unauthorized response. {PlayerCountSummary}", GetPlayerCountSummary(playerCount));
                             return;
                         }
 
@@ -909,7 +909,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 Guid.Empty,
                                 response,
-                                "AFM player count upload unauthorized after retry.",
+                                "TrimsSilver player count upload unauthorized after retry.",
                                 playerCountSummary: GetPlayerCountSummary(playerCount),
                                 serverId: playerCount.Server?.Id);
 
@@ -924,7 +924,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             Guid.Empty,
                             response,
-                            "HTTP error while uploading player count to AFM.",
+                            "HTTP error while uploading player count to TrimsSilver.",
                             playerCountSummary: GetPlayerCountSummary(playerCount),
                             serverId: playerCount.Server?.Id);
                         return;
@@ -978,7 +978,7 @@ namespace AlbionDataAvalonia.Network.Services
 
                 if (requestUri is null)
                 {
-                    Log.Error("Cannot upload achievements because AFM base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. Character: {CharacterName}. AchievementsCount: {AchievementsCount}.", identifier, achievementUpload.ServerId, achievementUpload.CharacterName, achievementUpload.Achievements.Count);
+                    Log.Error("Cannot upload achievements because TrimsSilver base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. Character: {CharacterName}. AchievementsCount: {AchievementsCount}.", identifier, achievementUpload.ServerId, achievementUpload.CharacterName, achievementUpload.Achievements.Count);
                     return ReportStatus(UploadStatus.Failed);
                 }
 
@@ -1006,7 +1006,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "AFM achievements upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver achievements upload returned unauthorized. Attempting token refresh.",
                             characterName: achievementUpload.CharacterName,
                             achievementsCount: achievementUpload.Achievements.Count,
                             serverId: achievementUpload.ServerId);
@@ -1017,7 +1017,7 @@ namespace AlbionDataAvalonia.Network.Services
                         var recovered = await _authService.TryRecoverFromUnauthorizedAsync();
                         if (!recovered)
                         {
-                            Log.Error("AFM achievements upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. Character: {CharacterName}. AchievementsCount: {AchievementsCount}.", identifier, achievementUpload.ServerId, achievementUpload.CharacterName, achievementUpload.Achievements.Count);
+                            Log.Error("TrimsSilver achievements upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. Character: {CharacterName}. AchievementsCount: {AchievementsCount}.", identifier, achievementUpload.ServerId, achievementUpload.CharacterName, achievementUpload.Achievements.Count);
                             return ReportStatus(UploadStatus.Failed);
                         }
 
@@ -1030,7 +1030,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 identifier,
                                 response,
-                                "AFM achievements upload unauthorized after retry.",
+                                "TrimsSilver achievements upload unauthorized after retry.",
                                 characterName: achievementUpload.CharacterName,
                                 achievementsCount: achievementUpload.Achievements.Count,
                                 serverId: achievementUpload.ServerId);
@@ -1046,7 +1046,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "HTTP error while uploading achievements to AFM.",
+                            "HTTP error while uploading achievements to TrimsSilver.",
                             characterName: achievementUpload.CharacterName,
                             achievementsCount: achievementUpload.Achievements.Count,
                             serverId: achievementUpload.ServerId);
@@ -1059,7 +1059,7 @@ namespace AlbionDataAvalonia.Network.Services
                         lastUploadedAchievementUpload = fingerprint;
                     }
 
-                    Log.Information("Successfully sent {AchievementsCount} achievements for character {CharacterName} on server {ServerId} to AFM achievements endpoint. Identifier: {Identifier}.", achievementUpload.Achievements.Count, achievementUpload.CharacterName, achievementUpload.ServerId, identifier);
+                    Log.Information("Successfully sent {AchievementsCount} achievements for character {CharacterName} on server {ServerId} to TrimsSilver achievements endpoint. Identifier: {Identifier}.", achievementUpload.Achievements.Count, achievementUpload.CharacterName, achievementUpload.ServerId, identifier);
                     return ReportStatus(UploadStatus.Success);
                 }
                 finally
@@ -1110,7 +1110,7 @@ namespace AlbionDataAvalonia.Network.Services
 
                 if (requestUri is null)
                 {
-                    Log.Error("Cannot upload global multiplier because AFM base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. GlobalMultiplier: {GlobalMultiplier}.", identifier, globalMultiplierUpload.ServerId, globalMultiplierUpload.GlobalMultiplier);
+                    Log.Error("Cannot upload global multiplier because TrimsSilver base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. GlobalMultiplier: {GlobalMultiplier}.", identifier, globalMultiplierUpload.ServerId, globalMultiplierUpload.GlobalMultiplier);
                     return ReportStatus(UploadStatus.Failed);
                 }
 
@@ -1138,7 +1138,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "AFM global multiplier upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver global multiplier upload returned unauthorized. Attempting token refresh.",
                             serverId: globalMultiplierUpload.ServerId,
                             globalMultiplier: globalMultiplierUpload.GlobalMultiplier);
 
@@ -1148,7 +1148,7 @@ namespace AlbionDataAvalonia.Network.Services
                         var recovered = await _authService.TryRecoverFromUnauthorizedAsync();
                         if (!recovered)
                         {
-                            Log.Error("AFM global multiplier upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. GlobalMultiplier: {GlobalMultiplier}.", identifier, globalMultiplierUpload.ServerId, globalMultiplierUpload.GlobalMultiplier);
+                            Log.Error("TrimsSilver global multiplier upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. GlobalMultiplier: {GlobalMultiplier}.", identifier, globalMultiplierUpload.ServerId, globalMultiplierUpload.GlobalMultiplier);
                             return ReportStatus(UploadStatus.Failed);
                         }
 
@@ -1161,7 +1161,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 identifier,
                                 response,
-                                "AFM global multiplier upload unauthorized after retry.",
+                                "TrimsSilver global multiplier upload unauthorized after retry.",
                                 serverId: globalMultiplierUpload.ServerId,
                                 globalMultiplier: globalMultiplierUpload.GlobalMultiplier);
 
@@ -1176,7 +1176,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "HTTP error while uploading global multiplier to AFM.",
+                            "HTTP error while uploading global multiplier to TrimsSilver.",
                             serverId: globalMultiplierUpload.ServerId,
                             globalMultiplier: globalMultiplierUpload.GlobalMultiplier);
 
@@ -1189,7 +1189,7 @@ namespace AlbionDataAvalonia.Network.Services
                     }
 
                     Log.Information(
-                        "Successfully sent global multiplier {GlobalMultiplier} for server {ServerId} to AFM global multiplier endpoint. Identifier: {Identifier}.",
+                        "Successfully sent global multiplier {GlobalMultiplier} for server {ServerId} to TrimsSilver global multiplier endpoint. Identifier: {Identifier}.",
                         globalMultiplierUpload.GlobalMultiplier,
                         globalMultiplierUpload.ServerId,
                         identifier);
@@ -1258,7 +1258,7 @@ namespace AlbionDataAvalonia.Network.Services
                 if (requestUri is null)
                 {
                     Log.Error(
-                        "Cannot upload festivities because AFM base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. EventsCount: {EventsCount}.",
+                        "Cannot upload festivities because TrimsSilver base address is not initialized. Identifier: {Identifier}. ServerId: {ServerId}. EventsCount: {EventsCount}.",
                         identifier,
                         festivitiesUpload.ServerId,
                         festivitiesUpload.Events.Count);
@@ -1286,7 +1286,7 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "AFM festivities upload returned unauthorized. Attempting token refresh.",
+                            "TrimsSilver festivities upload returned unauthorized. Attempting token refresh.",
                             serverId: festivitiesUpload.ServerId);
 
                         response.Dispose();
@@ -1296,7 +1296,7 @@ namespace AlbionDataAvalonia.Network.Services
                         if (!recovered)
                         {
                             Log.Error(
-                                "AFM festivities upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. EventsCount: {EventsCount}.",
+                                "TrimsSilver festivities upload could not recover from unauthorized response. Identifier: {Identifier}. ServerId: {ServerId}. EventsCount: {EventsCount}.",
                                 identifier,
                                 festivitiesUpload.ServerId,
                                 festivitiesUpload.Events.Count);
@@ -1311,7 +1311,7 @@ namespace AlbionDataAvalonia.Network.Services
                                 requestUri,
                                 identifier,
                                 response,
-                                "AFM festivities upload unauthorized after retry.",
+                                "TrimsSilver festivities upload unauthorized after retry.",
                                 serverId: festivitiesUpload.ServerId);
                             return ReportStatus(UploadStatus.Failed);
                         }
@@ -1324,13 +1324,13 @@ namespace AlbionDataAvalonia.Network.Services
                             requestUri,
                             identifier,
                             response,
-                            "HTTP error while uploading festivities to AFM.",
+                            "HTTP error while uploading festivities to TrimsSilver.",
                             serverId: festivitiesUpload.ServerId);
                         return ReportStatus(UploadStatus.Failed);
                     }
 
                     Log.Information(
-                        "Successfully sent {EventsCount} festivities events for server {ServerId} to AFM. Identifier: {Identifier}.",
+                        "Successfully sent {EventsCount} festivities events for server {ServerId} to TrimsSilver. Identifier: {Identifier}.",
                         festivitiesUpload.Events.Count,
                         festivitiesUpload.ServerId,
                         identifier);
@@ -1412,7 +1412,7 @@ namespace AlbionDataAvalonia.Network.Services
         {
             Log.Error(
                 ex,
-                "Exception while uploading to AFM. UploadType: {UploadType}. RequestUri: {RequestUri}. Identifier: {Identifier}. ServerId: {ServerId}. CharacterName: {CharacterName}. AchievementsCount: {AchievementsCount}. GlobalMultiplier: {GlobalMultiplier}. MarketUploadSummary: {MarketUploadSummary}. PlayerCountSummary: {PlayerCountSummary}. ItemEstimatedMarketValueSummary: {ItemEstimatedMarketValueSummary}",
+                "Exception while uploading to TrimsSilver. UploadType: {UploadType}. RequestUri: {RequestUri}. Identifier: {Identifier}. ServerId: {ServerId}. CharacterName: {CharacterName}. AchievementsCount: {AchievementsCount}. GlobalMultiplier: {GlobalMultiplier}. MarketUploadSummary: {MarketUploadSummary}. PlayerCountSummary: {PlayerCountSummary}. ItemEstimatedMarketValueSummary: {ItemEstimatedMarketValueSummary}",
                 uploadType,
                 requestUri,
                 identifier,

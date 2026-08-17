@@ -206,7 +206,7 @@ public class UserSettings : INotifyPropertyChanged
             {
                 uploadSpecsToTrimsSilver = value;
                 OnPropertyChanged(nameof(UploadSpecsToTrimsSilver));
-                Log.Information("Upload specs to AFM set to {UploadSpecsToTrimsSilver}", uploadSpecsToTrimsSilver);
+                Log.Information("Upload specs to TrimsSilver set to {UploadSpecsToTrimsSilver}", uploadSpecsToTrimsSilver);
             }
         }
     }

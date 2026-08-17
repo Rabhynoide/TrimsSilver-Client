@@ -301,7 +301,7 @@
 							TextWrapping="Wrap" />
 						<TextBlock
 							FontSize="14"
-							Text="1. Close the AFM data client (right click the system tray icon to close)."
+							Text="1. Close the TrimsSilver data client (right click the system tray icon to close)."
 							TextAlignment="Center"
 							TextWrapping="Wrap" />
 						<TextBlock
@@ -436,7 +436,7 @@
 				Classes="SectionCard"
 				IsVisible="{Binding ShowDataUi}">
 				<StackPanel Spacing="8" HorizontalAlignment="Center">
-					<Label Classes="SectionTitle" Content="Private Data (AFM)" />
+					<Label Classes="SectionTitle" Content="Private Data (TrimsSilver)" />
 
 					<WrapPanel HorizontalAlignment="Center" ItemsAlignment="Center">
 						<Border Classes="StatCard">

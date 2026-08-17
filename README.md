@@ -138,11 +138,11 @@ Once it restarts and you get ingame, you should see the app working.
 
 Older AFM installations may instead show `Permissions Update Available` and an `Update permissions` button. Run this one-time update to replace the legacy permission service.
 
-AFM checks for new versions and notifies you, but macOS updates must be downloaded and installed manually.
+TrimsSilver checks for new versions and notifies you, but macOS updates must be downloaded and installed manually.
 
 **Uninstallation**
 
-1. Quit AFM Data Client from the system tray.
+1. Quit TrimsSilver Data Client from the system tray.
 2. Open Terminal and remove the packet capture permission service:
 
    ```bash
@@ -153,7 +153,7 @@ AFM checks for new versions and notifies you, but macOS updates must be download
 
 3. Move `TrimsSilver_MacOS.app` from `Applications` to Trash.
 
-The uninstaller preserves your database, backups, settings, and logs. To remove all AFM user data as well, run the following only after confirming that you no longer need those files:
+The uninstaller preserves your database, backups, settings, and logs. To remove all TrimsSilver user data as well, run the following only after confirming that you no longer need those files:
 
 ```bash
 rm -rf "$HOME/Library/Application Support/TrimsSilver"
@@ -226,18 +226,18 @@ This application:
 
 ### How do I restore an automatic SQLite backup?
 
-AFM creates a compressed database backup every 24 hours. It keeps the three newest backups plus recovery points closest to 5, 10, and 15 days old. You can open the backup folder and see the same restore instructions in **Settings > Backup**.
+TrimsSilver creates a compressed database backup every 24 hours. It keeps the three newest backups plus recovery points closest to 5, 10, and 15 days old. You can open the backup folder and see the same restore instructions in **Settings > Backup**.
 
-Automatic backups are stored under the app data folder in `backups`. Each ZIP contains `afmdataclient.db`. Stored history and player data are included, but the saved sign-in token is removed.
+Automatic backups are stored under the app data folder in `backups`. Each ZIP contains `trimssilver.db`. Stored history and player data are included, but the saved sign-in token is removed.
 
 To restore a backup:
 
-1. Exit AFM from the system tray and confirm that it is no longer running.
+1. Exit TrimsSilver from the system tray and confirm that it is no longer running.
 2. Copy the current `data` folder somewhere safe.
 3. Extract the selected backup ZIP.
-4. In the `data` folder, move aside `afmdataclient.db` and any `afmdataclient.db-wal` or `afmdataclient.db-shm` files.
-5. Copy the extracted `afmdataclient.db` into the `data` folder.
-6. Start AFM, verify the restored history, and sign in again.
+4. In the `data` folder, move aside `trimssilver.db` and any `trimssilver.db-wal` or `trimssilver.db-shm` files.
+5. Copy the extracted `trimssilver.db` into the `data` folder.
+6. Start TrimsSilver, verify the restored history, and sign in again.
 
 ### How do I migrate all local data, including settings?
 
@@ -269,10 +269,10 @@ $XDG_DATA_HOME/TrimsSilver
 
 **Steps**
 
-1. Close AFM (exit from the system tray).
+1. Close TrimsSilver (exit from the system tray).
 2. Copy the entire `TrimsSilver` folder from the path above.
 3. On the new machine, paste it to the same path.
-4. Start AFM.
+4. Start TrimsSilver.
 
 ### How do I make it work with ExitLag?
 

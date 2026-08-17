@@ -247,7 +247,7 @@ public sealed class PortfolioUploadService : IDisposable
                 var alreadyPresent = uploadedTradeIds.Contains(request.TradeId);
                 if (!allowReupload && alreadyPresent)
                 {
-                    const string reason = "A transaction with this AFM Data Client trade id already exists in Portfolio. Confirm reupload to add it again.";
+                    const string reason = "A transaction with this TrimsSilver Data Client trade id already exists in Portfolio. Confirm reupload to add it again.";
                     result.SkippedTradeIds.Add(request.TradeId);
                     AddWarning(result, reason);
                     Log.Warning(

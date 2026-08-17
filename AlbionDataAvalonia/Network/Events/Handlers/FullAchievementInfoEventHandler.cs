@@ -33,7 +33,7 @@ public class FullAchievementInfoEventHandler : EventPacketHandler<FullAchievemen
         if (!settingsManager.UserSettings.UploadSpecsToTrimsSilver)
         {
             await Task.CompletedTask;
-            Log.Debug("Not uploading achievements, upload to AFM is disabled in settings.");
+            Log.Debug("Not uploading achievements, upload to TrimsSilver is disabled in settings.");
             return;
         }
 

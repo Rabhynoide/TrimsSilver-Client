@@ -157,7 +157,7 @@
                            FontSize="18"
                            Foreground="#FFC166" />
                 <TextBlock Grid.Column="1"
-                           Text="AFM Data Client"
+                           Text="TrimsSilver Data Client"
                            HorizontalAlignment="Right"
                            FontSize="18"
                            Foreground="#FFC166" />

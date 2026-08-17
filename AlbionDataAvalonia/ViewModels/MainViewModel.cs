@@ -395,15 +395,15 @@ public partial class MainViewModel : ViewModelBase
         if (!UserLoggedIn)
         {
             AddSidebarStatus(SidebarStatusItem.Warning(
-                "AFM Logged Out",
-                "Sign in to upload private AFM data."));
+                "TrimsSilver Logged Out",
+                "Sign in to upload private data."));
         }
 
         if (_networkListener.IsMacOSCapturePermissionSetupRequired)
         {
             AddSidebarStatus(SidebarStatusItem.Warning(
                 "Capture Blocked",
-                "macOS denied packet capture access. Install capture permissions to allow AFM Data Client to read network packets."));
+                "macOS denied packet capture access. Install capture permissions to allow TrimsSilver Data Client to read network packets."));
         }
         else if (IsMacOSCapturePermissionSetupOutdated)
         {
@@ -654,13 +654,13 @@ public partial class MainViewModel : ViewModelBase
             var installed = await _networkListener.InstallMacOSCapturePermissionsAsync();
             if (installed)
             {
-                Log.Information("Restarting AFM Data Client after macOS packet capture permission setup.");
+                Log.Information("Restarting TrimsSilver Data Client after macOS packet capture permission setup.");
                 if (TryRestartApplication())
                 {
                     return;
                 }
 
-                Log.Warning("Unable to restart AFM Data Client automatically. Restart the app manually to apply macOS packet capture permissions.");
+                Log.Warning("Unable to restart TrimsSilver Data Client automatically. Restart the app manually to apply macOS packet capture permissions.");
             }
         }
         finally
@@ -713,7 +713,7 @@ public partial class MainViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Unable to restart AFM Data Client automatically.");
+            Log.Error(ex, "Unable to restart TrimsSilver Data Client automatically.");
             return false;
         }
     }

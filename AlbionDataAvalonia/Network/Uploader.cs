@@ -67,14 +67,14 @@ public class Uploader : IDisposable
 
                 if (trimsSilverUploadStatus == UploadStatus.Success)
                 {
-                    Log.Information("Market upload to AFM Flipper complete. {Offers} offers, {Requests} requests. Locations: {Location}",
+                    Log.Information("Market upload to TrimsSilver complete. {Offers} offers, {Requests} requests. Locations: {Location}",
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer),
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.request),
                         string.Join(",", marketUpload.Orders.Select(x => x.Location.MarketLocation?.FriendlyName ?? "Unknown").Distinct()));
                 }
                 else
                 {
-                    Log.Error("Market upload to AFM Flipper receiver status {Status}. {Offers} offers, {Requests} requests.",
+                    Log.Error("Market upload to TrimsSilver receiver status {Status}. {Offers} offers, {Requests} requests.",
                         trimsSilverUploadStatus,
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.offer),
                         marketUpload.Orders.Count(x => x.AuctionType == AuctionType.request));
