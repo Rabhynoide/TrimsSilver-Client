@@ -146,7 +146,7 @@ public partial class TradesViewModel : ViewModelBase
 
     public bool CanSetSelectedTradeQuality => HasSelectedQualityEditableRows && !IsSettingQuality;
 
-    public bool CanAddSelectedTradesToPortfolio => HasSelectedRows && !IsAddingToPortfolio && !IsSelectedPortfolioPostLimitExceeded;
+    public bool CanAddSelectedTradesToPortfolio => FeatureFlags.AfmIntegrationEnabled && HasSelectedRows && !IsAddingToPortfolio && !IsSelectedPortfolioPostLimitExceeded;
 
     public NumericOption SelectedTradesToLoad
     {
@@ -486,7 +486,7 @@ public partial class TradesViewModel : ViewModelBase
             return true;
         }
 
-        SetPortfolioImportStatus("Sign in to AFM before adding trades to Portfolio.");
+        SetPortfolioImportStatus("Portfolio uploads are temporarily unavailable.");
         return false;
     }
 

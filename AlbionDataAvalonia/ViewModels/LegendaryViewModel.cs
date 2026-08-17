@@ -64,12 +64,14 @@ public partial class LegendaryViewModel : ViewModelBase
     private bool isAwakeningItemsTrackerDisabled;
 
     public bool CanListSelectedItem =>
-        SelectedItem?.CanPost == true
+        FeatureFlags.AfmIntegrationEnabled
+        && SelectedItem?.CanPost == true
         && IsSignedIn
         && !IsPosting;
 
     public bool CanCancelSelectedListing =>
-        SelectedItem?.IsActiveListing == true
+        FeatureFlags.AfmIntegrationEnabled
+        && SelectedItem?.IsActiveListing == true
         && IsSignedIn
         && !IsPosting;
 
@@ -356,6 +358,7 @@ public partial class LegendaryViewModel : ViewModelBase
     {
         SaleStatus = SelectedItem switch
         {
+            _ when !FeatureFlags.AfmIntegrationEnabled => "Sale listings are temporarily unavailable.",
             null => "Select a complete awakened item to list it for sale.",
             { CanPost: false } => "This item is missing data required for a sale listing.",
             _ when !IsSignedIn => "Sign in to AFM to list awakened items.",

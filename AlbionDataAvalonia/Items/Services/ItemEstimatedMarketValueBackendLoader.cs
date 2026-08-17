@@ -66,6 +66,11 @@ public sealed class ItemEstimatedMarketValueBackendLoader : IDisposable
 
     public void QueueMissingEstimatedMarketValue(int serverId, int itemId, string itemUniqueName, int? quality)
     {
+        if (!FeatureFlags.AfmIntegrationEnabled)
+        {
+            return;
+        }
+
         if (serverId <= 0 || itemId <= 0 || string.IsNullOrWhiteSpace(itemUniqueName))
         {
             return;

@@ -80,7 +80,7 @@ public sealed class PortfolioUploadService : IDisposable
     {
         if (!await EnsureValidAuthAsync(cancellationToken))
         {
-            const string message = "Sign in to AFM before adding trades to Portfolio.";
+            const string message = "Portfolio uploads are temporarily unavailable.";
             Log.Warning("Portfolio uploaded trade id refresh skipped because the user is not signed in");
             return PortfolioUploadedTradeIdsResult.Failed(message);
         }
@@ -167,7 +167,7 @@ public sealed class PortfolioUploadService : IDisposable
 
         if (!await EnsureValidAuthAsync(cancellationToken))
         {
-            const string message = "Sign in to AFM before adding trades to Portfolio.";
+            const string message = "Portfolio uploads are temporarily unavailable.";
             Log.Warning("Portfolio import failed before upload: {Reason}. TradeCount={TradeCount}", message, requests.Count);
             FailAll(result, requests, message);
             return result;
@@ -385,6 +385,11 @@ public sealed class PortfolioUploadService : IDisposable
 
     private async Task<bool> EnsureValidAuthAsync(CancellationToken cancellationToken)
     {
+        if (!FeatureFlags.AfmIntegrationEnabled)
+        {
+            return false;
+        }
+
         var hasValidToken = await _authService.EnsureValidTokenAsync(cancellationToken: cancellationToken);
         if (!hasValidToken || _authService.CurrentFirebaseUser is null)
         {

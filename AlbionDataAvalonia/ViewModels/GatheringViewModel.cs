@@ -104,7 +104,8 @@ public partial class GatheringViewModel : ViewModelBase, IDisposable
         && !IsAddingToPortfolio;
 
     public bool CanAddSelectedCompletedSessionToPortfolio =>
-        IsSelectedCompletedSessionLoaded
+        FeatureFlags.AfmIntegrationEnabled
+        && IsSelectedCompletedSessionLoaded
         && SelectedCompletedSession is { } selectedSession
         && selectedCompletedSessionDetails is { } details
         && details.Summary.Id == selectedSession.Id
@@ -362,7 +363,7 @@ public partial class GatheringViewModel : ViewModelBase, IDisposable
             return true;
         }
 
-        SetPortfolioImportStatus("Sign in to AFM before adding gathering data to Portfolio.");
+        SetPortfolioImportStatus("Portfolio uploads are temporarily unavailable.");
         return false;
     }
 
