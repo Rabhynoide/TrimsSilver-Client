@@ -203,9 +203,9 @@ jobs:
         run: |
           git fetch --tags
           if [ "${{ env.RELEASE_CHANNEL }}" = "beta" ]; then
-            LATEST_TAG=$(git tag --merged HEAD --list "v.*-beta" --sort=-version:refname | grep -v -- "^${{ env.RELEASE_TAG }}$" | head -n 1)
+            LATEST_TAG=$( (git tag --merged HEAD --list "v.*-beta" --sort=-version:refname | grep -v -- "^${{ env.RELEASE_TAG }}$" | head -n 1) || true)
           else
-            LATEST_TAG=$(git tag --merged HEAD --list "v.*" --sort=-version:refname | grep -v -- "-beta$" | grep -v -- "^${{ env.RELEASE_TAG }}$" | head -n 1)
+            LATEST_TAG=$( (git tag --merged HEAD --list "v.*" --sort=-version:refname | grep -v -- "-beta$" | grep -v -- "^${{ env.RELEASE_TAG }}$" | head -n 1) || true)
           fi
           CURRENT_COMMIT=$(git rev-parse HEAD)
           REPO_URL="https://github.com/Rabhynoide/TrimsSilver-Client"
