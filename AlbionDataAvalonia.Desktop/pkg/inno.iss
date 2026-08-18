@@ -2,7 +2,7 @@
 #define MyAppName "TrimsSilver Data Client"
 #define MyAppPublisher "TrimsSilver"
 #define MyAppPublisherURL "https://trimssilver.trimards-island.org"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.0.0"
 #define MyAppExeName "TrimsSilver.exe"
 #define MyAppOutputDir "userdocs:Inno Setup Output"
 #define MyAppOutputBaseFilename "TrimsSilverSetup"
